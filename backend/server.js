@@ -17,8 +17,9 @@ const adminOrderRoutes = require('./routes/adminOrderRoutes');
 const app = express();
 app.use(express.json());
 const allowedOrigins = [
-    "https://anuveshana-rph9.vercel.app", // Frontend URL on Vercel
-    "http://localhost:5173",              // Local frontend
+    "http://localhost:5173", // Local dev
+    "https://anuveshana.vercel.app", // Main backend domain
+    "https://anuveshana-rph9-kjqlm9sok-pavank5214s-projects.vercel.app", // Current Vercel deployment
   ];
   
   app.use(
