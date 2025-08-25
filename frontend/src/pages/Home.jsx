@@ -9,6 +9,7 @@ import FeaturesSection from '../components/products/FeaturesSection'
 import {useDispatch , useSelector} from "react-redux";
 import { fetchProductsByFilters } from "../redux/slices/productsSlice";
 import axios from "axios";
+import Features from "../components/common/Features"
 
 
 const Home = () => {
@@ -38,20 +39,21 @@ const Home = () => {
   return (
     <div>
       <Hero/>
-    <GenderCollectionSection/>
+    {/* <GenderCollectionSection/> */}
     <NewArrivals/>
+    <Features />
     {/* Best Sellers */}
-    <h2 className="text-3xl text-center font-bold mb-4">Best Seller </h2>
+    {/* <h2 className="text-3xl text-center font-bold mb-4">Best Seller </h2>
       {bestSellerProduct ? (<ProductDetails productId={bestSellerProduct._id}/>) : 
-      (<p className='text-center'>Loading best seller product ...</p>)}
+      (<p className='text-center'>Loading best seller product ...</p>)} */}
+     
     
-    
-    <div className="container mx-auto">
+    {/* <div className="container mx-auto">
       <h2 className="text-3xl text-center font-bold mb-4">
         Top Wears for Womwen
       </h2>
       <ProductGrid products={products} loading={loading} error={error}/>
-    </div>
+    </div> */}
     <FeaturedCollection/>
     <FeaturesSection/>
     </div>

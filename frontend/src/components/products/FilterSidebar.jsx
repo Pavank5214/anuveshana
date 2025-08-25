@@ -84,7 +84,7 @@ const FilterSidebar = () => {
       <h3 className="text-2xl font-semibold text-gray-800 mb-6 border-b pb-2">Filters</h3>
 
       {/* Category */}
-      <div className="mb-6">
+      {/* <div className="mb-6">
         <h4 className="text-lg font-medium text-gray-700 mb-3">Category</h4>
         {categories.map((category) => (
           <label key={category} className="flex items-center mb-2 cursor-pointer">
@@ -99,10 +99,10 @@ const FilterSidebar = () => {
             <span className="ml-2 text-gray-700">{category}</span>
           </label>
         ))}
-      </div>
+      </div> */}
 
       {/* Gender */}
-      <div className="mb-6">
+      {/* <div className="mb-6">
         <h4 className="text-lg font-medium text-gray-700 mb-3">Gender</h4>
         {genders.map((gender) => (
           <label key={gender} className="flex items-center mb-2 cursor-pointer">
@@ -117,10 +117,10 @@ const FilterSidebar = () => {
             <span className="ml-2 text-gray-700">{gender}</span>
           </label>
         ))}
-      </div>
+      </div> */}
 
       {/* Colors */}
-      <div className="mb-6">
+      {/* <div className="mb-6">
         <h4 className="text-lg font-medium text-gray-700 mb-3">Colors</h4>
         <div className="flex flex-wrap gap-3">
           {colors.map((color) => (
@@ -134,10 +134,10 @@ const FilterSidebar = () => {
             />
           ))}
         </div>
-      </div>
+      </div> */}
 
       {/* Sizes */}
-      <div className="mb-6">
+      {/* <div className="mb-6">
         <h4 className="text-lg font-medium text-gray-700 mb-3">Sizes</h4>
         <div className="grid grid-cols-3 gap-2">
           {sizes.map((size) => (
@@ -154,10 +154,10 @@ const FilterSidebar = () => {
             </label>
           ))}
         </div>
-      </div>
+      </div> */}
 
       {/* Material */}
-      <div className="mb-6">
+      {/* <div className="mb-6">
         <h4 className="text-lg font-medium text-gray-700 mb-3">Material</h4>
         {materials.map((material) => (
           <label key={material} className="flex items-center mb-2 cursor-pointer">
@@ -172,10 +172,10 @@ const FilterSidebar = () => {
             <span className="ml-2 text-gray-700">{material}</span>
           </label>
         ))}
-      </div>
+      </div> */}
 
       {/* Brand */}
-      <div className="mb-6">
+      {/* <div className="mb-6">
         <h4 className="text-lg font-medium text-gray-700 mb-3">Brands</h4>
         {brands.map((brand) => (
           <label key={brand} className="flex items-center mb-2 cursor-pointer">
@@ -190,7 +190,7 @@ const FilterSidebar = () => {
             <span className="ml-2 text-gray-700">{brand}</span>
           </label>
         ))}
-      </div>
+      </div> */}
 
       {/* Price Range */}
       <div>

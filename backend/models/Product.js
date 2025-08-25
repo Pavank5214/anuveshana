@@ -14,14 +14,6 @@ const productShema = new mongoose.Schema({
         type:Number,
         required: true,
     },
-    discountPrice: {
-        type: Number,
-    },
-    countInStock : {
-        type: Number,
-        required: true,
-        default:0,
-    },
     sku:{
         type : String,
         unique : true,
@@ -32,27 +24,21 @@ const productShema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    brand:{
-        type: String,
-    },
     sizes:{
         type:[String],
         required: true,
     },
-    colors:{
+    textColors:{
+        type:[String],
+        required: true,
+    },
+    baseColors:{
         type:[String],
         required: true,
     },
     collections:{
         type: String,
         required: true,
-    },
-    material :{
-        type:String,
-    },
-    gender:{
-        type : String,
-        enum:["Men","Women","Unisex"],
     },
     images:[
         {
@@ -81,7 +67,7 @@ const productShema = new mongoose.Schema({
     type:Number,
     default:0,
    },
-   tags:[String],
+   
    user:{
     type : mongoose.Schema.Types.ObjectId,
     ref:"User",
@@ -96,12 +82,7 @@ const productShema = new mongoose.Schema({
    metaKeywords:{
     type:String,
    },
-   dimensions:{
-    length: Number,
-    width:Number,
-    height: Number,
-   },
-   weight: Number,
+
 },
 {timestamps : true}
 );

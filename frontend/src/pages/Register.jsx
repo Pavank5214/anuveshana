@@ -1,81 +1,146 @@
-import React, { useState , useEffect } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import login from "../assets/login.jpg"
-import logo from "../assets/logo.png"
-import { registerUser } from '../redux/slices/authSlice';
+import React, { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../redux/slices/authSlice";
 import { mergeCart } from "../redux/slices/cartSlice";
-import { useDispatch, useSelector } from 'react-redux';
+import { Loader2 } from "lucide-react";
+import logo from "../assets/logo.png";
+import registerIllustration from "../assets/login.jpg"
 
 const Register = () => {
-    const [name, setName] = useState("");
-    const [email,setEmail] = useState("");
-    const [password , setPassword] = useState("");
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const location = useLocation();
-    const {user, guestId} = useSelector((state)=> state.auth);
-    const {cart} = useSelector((state)=> state.cart)
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    // Get redirect parameter and check if it's checkout or something
-    const redirect = new URLSearchParams(location.search).get("redirect") || "/";
-    const isCheckoutRedirect = redirect.includes("checkout");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { user, guestId, loading } = useSelector((state) => state.auth);
+  const { cart } = useSelector((state) => state.cart);
 
-    useEffect(()=>{
-        if(user){
-            if(cart?.products.length>0&&guestId){
-                dispatch(mergeCart({guestId , user})).then(()=>{
-                    navigate(isCheckoutRedirect ? "/checkout" : "/");
-                })
-            } else{
-                navigate(isCheckoutRedirect ? "/checkout" : "/");
-            }
-        }
-    }, [user, guestId, cart , navigate, isCheckoutRedirect , dispatch])
+  const redirect = new URLSearchParams(location.search).get("redirect") || "/";
+  const isCheckoutRedirect = redirect.includes("checkout");
 
-    const handleSubmit =(e)=>{
-        e.preventDefault();
-        dispatch(registerUser({name , email , password}))
+  useEffect(() => {
+    if (user) {
+      if (cart?.products.length > 0 && guestId) {
+        dispatch(mergeCart({ guestId, user })).then(() => {
+          navigate(isCheckoutRedirect ? "/checkout" : "/");
+        });
+      } else {
+        navigate(isCheckoutRedirect ? "/checkout" : "/");
+      }
     }
-  return (
-    <div className='flex'>
-     <div className="w-full md:w-1/2 flex flex-col justify-center items-center p-8 md:p-12">
-        <form onSubmit={handleSubmit} className="w-full max-w-md bg-white p-8 rounded-lg border shadow-sm" >
-            <div className="flex justify-center items-center mb-1">
-            <img src={logo} alt="logo" className="w-15 h-10  object-contain"/>
-            </div>
-            <h2 className='text-2xl font-bold text-center mb-6'>Anuveshana Technologies</h2>
-            <p className="text-center mb-6">
-                Enter your details to register
-            </p>
-            <div className="mb-4">
-                <label className='block text-sm font-semibold mb-2'>Name</label>
-                <input type="text" value={name} onChange={(e)=> setName(e.target.value)} 
-                className='w-full p-2 border rounded' placeholder='Enter your name'/>
-            </div>
-            <div className="mb-4">
-                <label className='block text-sm font-semibold mb-2'>Email</label>
-                <input type="email" value={email} onChange={(e)=> setEmail(e.target.value)} 
-                className='w-full p-2 border rounded' placeholder='Enter your email address'/>
-            </div>
-            <div className="mb-4">
-            <label className='block text-sm font-semibold mb-2'>Password</label>
-            <input type="password" value={password} onChange={(e)=> setPassword(e.target.value)} 
-            className='w-full p-2 border rounded' placeholder='Enter your password'/>
-            </div>
-            <button type="submit" className='w-full bg-black text-white p-2 rounded-lg font-semibold hover:bg-gray-800 transition'>{loading ? "Loading..." : "Sign Up"}</button>
-            <p className="mt-6 text-center text-sm"> have an account?
-                <Link to={`/login?redirect=${encodeURIComponent(redirect)}`} className="text-blue-700"> Login</Link>
-            </p>
-        </form>
-        </div>
-            <div className="hidden md:block w-1/2 bg-gray-800">
-               <div className="h-full flex flex-col justify-center items-center">
-                   <img src={login} alt="login to account" className='h-[750px] w-full object-cover'/>
-               </div>
-            </div>
-     
-    </div>
-  )
-}
+  }, [user, guestId, cart, navigate, isCheckoutRedirect, dispatch]);
 
-export default Register
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(registerUser({ name, email, password }));
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-100 to-blue-100 flex items-center justify-center p-4">
+      <div className="w-full max-w-5xl bg-white rounded-2xl shadow-2xl overflow-hidden grid md:grid-cols-2">
+        
+        {/* Left Illustration */}
+        <div className="hidden md:flex bg-gradient-to-br from-purple-500 to-pink-600 items-center justify-center p-8">
+          <img
+            src={registerIllustration}
+            alt="Register Illustration"
+            className="w-4/5 max-w-md animate-fadeIn"
+          />
+        </div>
+
+        {/* Right Register Form */}
+        <div className="flex flex-col justify-center p-8 sm:p-12">
+          {/* Logo */}
+          <div className="flex justify-center items-center mb-6">
+            <img src={logo} alt="Logo" className="w-16 h-16 object-contain mr-3" />
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
+              Anuveshana Technologies
+            </h2>
+          </div>
+
+          {/* Welcome Text */}
+          <h2 className="text-2xl sm:text-3xl font-semibold text-center mb-2 text-gray-900">
+            Create Your Account
+          </h2>
+          <p className="text-gray-500 text-center mb-6 text-sm sm:text-base">
+            Fill in your details to get started
+          </p>
+
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Name */}
+            <div>
+              <label className="block text-sm font-medium mb-1 text-gray-700">
+                Full Name
+              </label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full p-3 rounded-xl border border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:bg-white transition-all"
+                placeholder="Enter your name"
+                required
+              />
+            </div>
+
+            {/* Email */}
+            <div>
+              <label className="block text-sm font-medium mb-1 text-gray-700">
+                Email Address
+              </label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full p-3 rounded-xl border border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:bg-white transition-all"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+
+            {/* Password */}
+            <div>
+              <label className="block text-sm font-medium mb-1 text-gray-700">
+                Password
+              </label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full p-3 rounded-xl border border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:bg-white transition-all"
+                placeholder="Enter your password"
+                required
+              />
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full flex items-center justify-center bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white p-3 rounded-xl font-semibold transition-all duration-300 shadow-lg"
+            >
+              {loading ? <Loader2 className="animate-spin mr-2" size={20} /> : ""}
+              {loading ? "Signing Up..." : "Sign Up"}
+            </button>
+          </form>
+
+          {/* Login Link */}
+          <p className="mt-6 text-center text-gray-600 text-sm sm:text-base">
+            Already have an account?{" "}
+            <Link
+              to={`/login?redirect=${encodeURIComponent(redirect)}`}
+              className="text-purple-600 hover:underline font-semibold"
+            >
+              Login here
+            </Link>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Register;

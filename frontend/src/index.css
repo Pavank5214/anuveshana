@@ -5,3 +5,16 @@
     font-optical-sizing:" auto";
     font-style:"normal";
 }
+/* Create the .scrollbar-hide utility */
+.scrollbar-hide {
+    /* For Firefox */
+    scrollbar-width: none;
+    
+    /* For Internet Explorer and Edge */
+    -ms-overflow-style: none;
+  }
+  
+  /* For Chrome, Safari, and Opera */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }

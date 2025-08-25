@@ -1,19 +1,28 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { HiOutlineUser, HiOutlineShoppingBag, HiBars3BottomRight } from 'react-icons/hi2';
 import { IoMdClose } from 'react-icons/io';
+import { useSelector } from 'react-redux';
 import SearchBar from './SearchBar';
 import CartDrawer from '../layout/CartDrawer';
 import logo from '../../assets/logo.png';
-import { useSelector } from 'react-redux';
 
-const Navbar = () => {
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About Us' },
+  { href: '/portfolio', label: 'Portfolio' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/contact', label: 'Contact' },
+];
+
+const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [navDrawerOpen, setNavDrawerOpen] = useState(false);
-  const {cart} = useSelector((state)=> state.cart);
-  const {user} = useSelector((state)=> state.auth);
 
-  const cartItemCount = cart?.products?.reduce((total,product)=> total+product.quantity , 0) || 0 ;
+  const { cart } = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.auth);
+
+  const cartItemCount = cart?.products?.reduce((total, product) => total + product.quantity, 0) || 0;
 
   const navDrawerRef = useRef(null);
   const cartDrawerRef = useRef(null);
@@ -27,11 +36,9 @@ const Navbar = () => {
   };
 
   const handleClickOutside = (e) => {
-    // Close mobile nav
     if (navDrawerRef.current && !navDrawerRef.current.contains(e.target)) {
       setNavDrawerOpen(false);
     }
-    // Close cart drawer
     if (cartDrawerRef.current && !cartDrawerRef.current.contains(e.target)) {
       setDrawerOpen(false);
     }
@@ -46,91 +53,97 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="container mx-auto flex items-center justify-between py-4 px-6">
-        {/* left icon */}
-        <div className="flex items-center">
-          <img src={logo} alt="logo" className="w-15 h-10 object-contain" />
-          <Link to="/" className="text-xl sm:text-2xl font-medium">
-            Anuveshana
+      <header className="sticky top-0 z-40 bg-[#0a1a2f] text-white shadow-lg">
+        <div className="container mx-auto flex items-center justify-between py-3 px-4">
+          {/* Left: Logo and Site Name */}
+          <Link to="/" className="flex items-center gap-3">
+            <img src={logo} alt="Anuveshana Logo" className="h-12 w-auto" />
+            {/* --- CORRECTED THIS LINE --- */}
+            <span className="text-lg sm:text-xl font-bold tracking-tight">
+              Anuveshana Technologies
+            </span>
           </Link>
-        </div>
 
-        {/* middle menu */}
-        <div className="hidden md:flex space-x-6">
-          <Link to="/collections/all?gender=Men" className="text-gray-700 hover:text-black text-sm font-medium uppercase">
-            MEN
-          </Link>
-          <Link to="/collections/all?gender=Women" className="text-gray-700 hover:text-black text-sm font-medium uppercase">
-            WOMEN
-          </Link>
-          <Link to="/collections/all?category=Top+Wear" className="text-gray-700 hover:text-black text-sm font-medium uppercase">
-            TOPWEAR
-          </Link>
-          <Link to="/collections/all?category=Bottom+Wear" className="text-gray-700 hover:text-black text-sm font-medium uppercase">
-            BOTTOMWEAR
-          </Link>
-        </div>
+          {/* Middle: Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-6">
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.href}
+                to={link.href}
+                className={({ isActive }) =>
+                  `text-sm font-semibold uppercase transition-colors hover:text-[#ff6200] ${
+                    isActive ? 'text-[#ff6200]' : 'text-gray-200'
+                  }`
+                }
+              >
+                {link.label}
+              </NavLink>
+            ))}
+          </nav>
 
-        {/* right icons */}
-        <div className="flex items-center space-x-4">
-          {user && user.role === "admin" && (<Link to="/admin" className='block bg-black px-2 rounded text-sm text-white'>Admin</Link>)}
-          
-          <Link to="/profile" className="hover:text-black">
-            <HiOutlineUser className="h-6 w-6 text-gray-700" />
-          </Link>
-          <button onClick={toggleCartDrawer} className="relative hover:text-black">
-            <HiOutlineShoppingBag className="h-6 w-6 text-gray-700" />
-            {cartItemCount > 0 && ( <span className="absolute -top-1 bg-[#ea2e0e] text-white text-xs rounded-full px-2 py-0.5">
-             {cartItemCount}
-            </span>)}
-           
-          </button>
-          <div className="overflow-hidden">
-            <SearchBar />
+          {/* Right: Icons and Actions */}
+          <div className="flex items-center space-x-2 sm:space-x-4">
+            {user && user.role === "admin" && (<Link to="/admin" className='block bg-white px-2 rounded text-sm text-black font-semibold'>Admin</Link>)}
+            
+            <Link to="/profile" className="hover:text-[#ff6200] transition-colors">
+              <HiOutlineUser className="h-6 w-6" />
+            </Link>
+            <button onClick={toggleCartDrawer} className="relative hover:text-[#ff6200] transition-colors">
+              <HiOutlineShoppingBag className="h-6 w-6" />
+              {cartItemCount > 0 && ( <span className="absolute -top-1 -right-2 bg-[#ff6200] text-white text-xs rounded-full px-1.5 py-0.5">
+                {cartItemCount}
+              </span>)}
+            </button>
+            <div className="hidden lg:block">
+              <SearchBar />
+            </div>
+            <button onClick={toggleNavDrawer} className="md:hidden p-2">
+              <HiBars3BottomRight className="h-6 w-6" />
+            </button>
           </div>
-          <button onClick={toggleNavDrawer} className="md:hidden">
-            <HiBars3BottomRight className="h-6 w-6 text-gray-700" />
-          </button>
         </div>
-      </nav>
+      </header>
 
-      {/* Cart Drawer with outside click detection */}
+      {/* Cart Drawer */}
       <div ref={cartDrawerRef}>
         <CartDrawer drawerOpen={drawerOpen} toggleCartDrawer={toggleCartDrawer} />
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation Drawer */}
       <div
         ref={navDrawerRef}
         className={`fixed top-0 left-0 w-3/4 sm:w-1/2 md:w-1/3 h-full bg-white shadow-lg transform transition-transform duration-300 z-50 ${
           navDrawerOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <div className="flex justify-end p-4">
-          <button onClick={toggleNavDrawer}>
-            <IoMdClose className="h-6 w-6 text-gray-600" />
-          </button>
+        <div className="flex justify-between items-center p-4 border-b">
+          <h2 className="text-xl font-semibold text-gray-800">Menu</h2>
+          <button onClick={toggleNavDrawer}><IoMdClose className="h-6 w-6 text-gray-700" /></button>
         </div>
-        <div className="p-4">
-          <h2 className="text-xl font-semibold mb-4">Menu</h2>
-          <nav className="space-y-4">
-            <Link to="/collections/all?gender=Men" onClick={toggleNavDrawer} className="block text-gray-600 hover:text-black">
-              Men
-            </Link>
-            <Link to="/collections/all?gender=Women" onClick={toggleNavDrawer} className="block text-gray-600 hover:text-black">
-              Women
-            </Link>
-            <Link to="/collections/all?category=Top+Wear" onClick={toggleNavDrawer} className="block text-gray-600 hover:text-black">
-              Topwear
-            </Link>
-            <Link to="/collections/all?category=Bottom+Wear" onClick={toggleNavDrawer} className="block text-gray-600 hover:text-black">
-              Bottomwear
-            </Link>
-          </nav>
+        
+        <div className="p-4 border-b border-gray-200">
+            <SearchBar />
         </div>
+        
+        <nav className="p-4 flex flex-col gap-4">
+          {navLinks.map((link) => (
+             <NavLink
+             key={link.href}
+             to={link.href}
+             onClick={toggleNavDrawer}
+             className={({ isActive }) =>
+                 `text-lg font-semibold block p-2 rounded-md transition-colors ${
+                   isActive ? 'bg-orange-100 text-[#ff6200]' : 'text-gray-700 hover:bg-gray-100'
+                 }`
+               }
+           >
+             {link.label}
+           </NavLink>
+          ))}
+        </nav>
       </div>
     </>
   );
 };
 
-export default Navbar;
+export default Header;

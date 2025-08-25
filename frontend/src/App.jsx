@@ -17,7 +17,12 @@ import UserManagement from "./components/admin/UserManagement"
 import ProductManagement from "./components/admin/ProductManagement"
 import EditProductPage from "./components/admin/EditProductPage"
 import OrderManagement from "./components/admin/OrderManagement"
-
+import CreateProductPage from "./components/admin/CreateProductPage"
+import Portfolio from "./pages/Portfolio"
+import Blog from "./pages/Blog"
+import FileUpload from "./components/common/FileUpload"
+import AboutUs from "./components/common/AboutUs"
+import ContactUs from "./components/common/ContactUs"
 import {Provider} from "react-redux"
 import store from "./redux/store"
 import ProtectedRoute from "./components/common/ProtectedRoute"
@@ -31,6 +36,11 @@ const App = () => {
         {/* User Routes */}
         <Route path="/" element={<UserLayout />}>
           <Route index element={<Home />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path ="/upload" element={<FileUpload/>} />
+          <Route path="/blog" element={<Blog/>} />
+          <Route path="/about" element={<AboutUs/>} />
+          <Route path="/contact" element={<ContactUs/>} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="profile" element={<Profile />} />
@@ -49,7 +59,8 @@ const App = () => {
         <Route path="products" element={<ProductManagement />}/>
         <Route path="products/:id/edit" element={<EditProductPage />}/>
         <Route path="orders" element={<OrderManagement />}/>
-        
+        <Route path="/admin/products/create" element={<CreateProductPage />} />
+
          
         </Route>
       </Routes>

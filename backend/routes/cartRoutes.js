@@ -20,7 +20,7 @@ const getCart = async(userId, guestId)=>{
 // @desc Add a product to the cart for a guest or logged in user
 // @access Public
 router.post("/", async(req,res)=>{
-    const {productId, quantity, size , color , guestId , userId} = req.body;
+    const {productId, quantity, custName, size ,textColor,baseColor , guestId , userId} = req.body;
     try {
         const product = await Product.findById(productId);
         if(!product) return res.status(404).json({message: "Product not found"});
@@ -31,7 +31,7 @@ router.post("/", async(req,res)=>{
         //if the cart exists, update it
         if(cart){
             const productIndex = cart.products.findIndex((p)=> p.productId.toString() === productId && 
-            p.size === size && p.color === color);
+            p.size === size && p.textColor === textColor && p.baseColor === baseColor && p.custName === custName );
             if(productIndex > -1){
                //if product already exists, update the quantity
                cart.products[productIndex].quantity += quantity;
@@ -42,8 +42,10 @@ router.post("/", async(req,res)=>{
                     name: product.name,
                     image: product.images[0].url,
                     price: product.price,
+                    custName,
                     size,
-                    color,
+                    textColor,
+                    baseColor,
                     quantity,
                 });
             }
@@ -65,8 +67,10 @@ router.post("/", async(req,res)=>{
                         name: product.name,
                         image: product.images[0].url,
                         price: product.price,
+                        custName,
                         size ,
-                        color ,
+                        textColor,
+                        baseColor,
                         quantity ,
                     },
                 ],
@@ -84,13 +88,13 @@ router.post("/", async(req,res)=>{
 // @desc Update product quantity in the cart for a guest or logged-in user
 // @access Public
 router.put("/", async (req, res) => {
-    const {productId, quantity, size , color , guestId , userId} = req.body;
+    const {productId, quantity, size  , guestId , userId} = req.body;
     try {
         let cart = await getCart(userId, guestId);
         if(!cart) return res.status(404).json({message: "Cart not found"});
 
         const productIndex = cart.products.findIndex((p)=> p.productId.toString() === productId && 
-        p.size === size && p.color === color);
+        p.size === size  );
         if(productIndex > -1){
             //update quantity
             if(quantity > 0){
@@ -116,12 +120,12 @@ router.put("/", async (req, res) => {
 // @desc Remove product from the cart for a guest or logged-in user
 // @access Public
 router.delete("/", async(req,res)=>{
-    const {productId, size, color, guestId, userId} = req.body;
+    const {productId, size, guestId, userId} = req.body;
     try {
         let cart = await getCart(userId, guestId);
         if(!cart) return res.status(404).json({message: "Cart not found"});
         const productIndex = cart.products.findIndex((p)=> p.productId.toString() === productId && 
-        p.size === size && p.color === color);
+        p.size === size );
 
         if(productIndex > -1){
             cart.products.splice(productIndex, 1);

@@ -26,8 +26,10 @@ router.post("/", protect, async (req, res) => {
                     image: item.image,
                     price: item.price,
                     quantity: item.quantity,
-                    size: item.size,    // ✅ Store size
-                    color: item.color,  // ✅ Store color
+                    size: item.size, 
+                    custName : item.custName,   
+                    textColor: item.textColor,
+                    baseColor : item.baseColor  
                   })),
                 shippingAddress,
                 paymentMethod,
@@ -85,8 +87,10 @@ router.post("/:id/finalize", protect, async (req, res) => {
                     image: item.image,
                     price: item.price,
                     quantity: item.quantity,
-                    size: item.size,    // ✅ Include size
-                    color: item.color,  // ✅ Include color
+                    size: item.size,    
+                    custName : item.custName,   
+                    textColor: item.textColor,
+                    baseColor : item.baseColor   
                   })),
                 shippingAddress : checkout.shippingAddress,
                 paymentMethod : checkout.paymentMethod,

@@ -12,7 +12,7 @@ export const fetchAdminProducts = createAsyncThunk(
   "adminProducts/fetchProducts",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.get("/api/admin/products");
+      const response = await axiosInstance.get("/api/products");
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || "Failed to fetch products");
@@ -25,8 +25,10 @@ export const createProduct = createAsyncThunk(
   "adminProducts/createProduct",
   async (productData, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.post("/api/admin/products", productData);
+      const response = await axiosInstance.post("/api/products", productData);
+      
       return response.data;
+      
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || "Failed to create product");
     }
