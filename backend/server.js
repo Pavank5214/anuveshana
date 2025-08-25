@@ -16,7 +16,28 @@ const adminOrderRoutes = require('./routes/adminOrderRoutes');
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+const allowedOrigins = [
+    "https://anuveshana-rph9.vercel.app", // Frontend URL on Vercel
+    "http://localhost:5173",              // Local frontend
+  ];
+  
+  app.use(
+    cors({
+      origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl)
+        if (!origin) return callback(null, true);
+  
+        if (allowedOrigins.includes(origin)) {
+          callback(null, true);
+        } else {
+          callback(new Error("CORS not allowed from this origin"));
+        }
+      },
+      methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+      credentials: true,
+    })
+  );
+  
 
 dotenv.config();
 
