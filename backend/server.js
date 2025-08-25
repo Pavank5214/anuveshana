@@ -17,24 +17,13 @@ const adminOrderRoutes = require('./routes/adminOrderRoutes');
 const app = express();
 app.use(express.json());
 const allowedOrigins = [
-    "http://localhost:5173", // Local dev
-    "https://anuveshana.vercel.app", // Main backend domain
-    "https://anuveshana-rph9-kjqlm9sok-pavank5214s-projects.vercel.app", // Current Vercel deployment
+    "http://localhost:5173",  // Local frontend
+    "https://anuveshana-rph9.vercel.app",  // Your frontend on Vercel
   ];
-  
   app.use(
     cors({
-      origin: function (origin, callback) {
-        // Allow requests with no origin (like mobile apps or curl)
-        if (!origin) return callback(null, true);
-  
-        if (allowedOrigins.includes(origin)) {
-          callback(null, true);
-        } else {
-          callback(new Error("CORS not allowed from this origin"));
-        }
-      },
-      methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+      origin: [/\.vercel\.app$/], // Allow all Vercel frontend URLs
+      methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
       credentials: true,
     })
   );
