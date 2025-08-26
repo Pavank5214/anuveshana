@@ -1,8 +1,7 @@
 const express = require("express")
 const Product = require("../models/Product")
 const {protect,admin} = require("../middleware/authMiddleware")
-const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
+
 
 
 const router = express.Router();
