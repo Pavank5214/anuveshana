@@ -6,7 +6,10 @@ import checkoutReducer from "./slices/checkoutSlice";
 import orderReducer from "./slices/orderSlice";
 import adminReducer from "./slices/adminSlice";
 import adminProductReducer from "./slices/adminProductSlice";
-import adminOrdersReduccer from "./slices/adminOrderSlice"
+import adminOrdersReducer from "./slices/adminOrderSlice";
+import portfolioReducer from "./slices/portfolioSlice";
+import contactReducer from "./slices/contactSlice"
+
 
 const store = configureStore({
   reducer: {
@@ -17,7 +20,9 @@ const store = configureStore({
     orders : orderReducer,
     admin: adminReducer,
     adminProducts: adminProductReducer,
-    adminOrders : adminOrdersReduccer,
+    adminOrders : adminOrdersReducer,
+    portfolio : portfolioReducer,
+    contacts : contactReducer
   },
 });
 

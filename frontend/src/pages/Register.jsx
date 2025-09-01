@@ -5,7 +5,7 @@ import { registerUser } from "../redux/slices/authSlice";
 import { mergeCart } from "../redux/slices/cartSlice";
 import { Loader2 } from "lucide-react";
 import logo from "../assets/logo.png";
-import registerIllustration from "../assets/login.jpg"
+import registerIllustration from "../assets/Register.png"
 
 const Register = () => {
   const [name, setName] = useState("");

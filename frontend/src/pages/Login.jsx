@@ -5,7 +5,7 @@ import { loginUser } from "../redux/slices/authSlice";
 import { mergeCart } from "../redux/slices/cartSlice";
 import { Loader2 } from "lucide-react";
 import logo from "../assets/logo.png";
-import loginIllustration from "../assets/login.jpg"; // Add a cool SVG illustration
+import loginIllustration from "../assets/Login.png"; // Add a cool SVG illustration
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -14,7 +14,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { user, guestId, loading } = useSelector((state) => state.auth);
+  const { user, guestId, loading , error} = useSelector((state) => state.auth);
   const { cart } = useSelector((state) => state.cart);
 
   const redirect = new URLSearchParams(location.search).get("redirect") || "/";
@@ -99,6 +99,12 @@ const Login = () => {
                 required
               />
             </div>
+              {/* Error Message */}
+              {error && (
+              <div className="bg-red-100 text-red-700 border border-red-400 rounded-lg px-4 py-2 text-center animate-fadeIn">
+                {error || "Invalid credentials. Please try again."}
+              </div>
+            )}
 
             {/* Submit Button */}
             <button

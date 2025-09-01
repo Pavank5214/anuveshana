@@ -44,7 +44,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-gray-50 text-gray-800 font-sans p-4 sm:p-6 lg:p-8">
+    <div className="relative min-h-screen bg-gray-50 text-gray-800 font-sans p-4 sm:p-6 lg:p-8 mt-30">
       {/* Subtle Watercolor Background Effect */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-0 -left-1/4 h-96 w-96 bg-[radial-gradient(circle_at_center,_#67e8f920_0,_#f9fafb_60%)] opacity-70 blur-3xl"></div>

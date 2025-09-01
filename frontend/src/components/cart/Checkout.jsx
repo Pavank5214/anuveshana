@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import PaypalButton from "./PaypalButton";
+import RazorpayButton from "./RazorpayButton";
 import { useDispatch, useSelector } from "react-redux";
 import { createCheckout } from "../../redux/slices/checkoutSlice";
 import axios from "axios";
@@ -35,7 +35,7 @@ const Checkout = () => {
         createCheckout({
           checkoutItems: cart.products,
           shippingAddress,
-          paymentMethod: "Paypal",
+          paymentMethod: "Razorpay",
           totalPrice: cart.totalPrice,
         })
       );
@@ -60,6 +60,7 @@ const Checkout = () => {
       await handleFinalizeCheckout(checkoutId);
     } catch (error) {
       console.error(error);
+      alert("Payment failed. Please try again.");
     }
   };
 
@@ -77,18 +78,17 @@ const Checkout = () => {
       navigate("/order-confirmation");
     } catch (error) {
       console.error(error);
+      alert("Could not finalize the order. Contact support.");
     }
   };
 
   if (loading) return <p className="text-center py-8 text-gray-600">Loading cart...</p>;
   if (error) return <p className="text-center py-8 text-red-500">Error: {error}</p>;
-  if (!cart || !cart.products || cart.products.length === 0) {
+  if (!cart || !cart.products || cart.products.length === 0)
     return <p className="text-center py-8 text-gray-600">Your cart is empty</p>;
-  }
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto py-10 px-6 tracking-tight">
-      
       {/* Left Section */}
       <div className="bg-white shadow-xl rounded-2xl p-8 border border-gray-100">
         <h2 className="text-3xl font-semibold uppercase mb-6 text-gray-900">Checkout</h2>
@@ -199,12 +199,12 @@ const Checkout = () => {
                 Continue to Payment
               </button>
             ) : (
-              <div className="">
-                <h3 className="text-lg mb-4 font-semibold">Pay with PayPal</h3>
-                <PaypalButton
+              <div>
+                <h3 className="text-lg mb-4 font-semibold">Pay with Razorpay</h3>
+                <RazorpayButton
                   amount={cart.totalPrice}
                   onSuccess={handlePaymentSuccess}
-                  onError={(err) => alert("Payment failed. Try again.")}
+                  onError={(err) => alert("Payment failed or cancelled.")}
                 />
               </div>
             )}

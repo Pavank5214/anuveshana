@@ -37,7 +37,7 @@ const Home = () => {
   fetchBestSeller()
 }, [dispatch]);
   return (
-    <div>
+    <div className='pt-26'>
       <Hero/>
     {/* <GenderCollectionSection/> */}
     <NewArrivals/>

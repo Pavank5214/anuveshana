@@ -112,7 +112,7 @@ const NewArrivals = () => {
                   <h3 className="font-semibold text-lg text-white truncate group-hover:text-[#ff6200] transition-colors">
                     {product.name}
                   </h3>
-                  <p className="text-sm text-gray-300">${product.price}</p>
+                  <p className="text-sm text-gray-300">₹{product.price}</p>
                 </Link>
               </div>
             </motion.div>

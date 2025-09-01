@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Users, Target, Cuboid, Bot, BrainCircuit } from 'lucide-react';
-
+import aboutus from "../../assets/aboutus.jpg"
+import { useEffect } from "react";
 // --- Mock Data (images removed) ---
 const teamMembers = [
   { name: 'Rohan K.', role: 'Founder & Lead Engineer', bio: 'With a decade of experience in mechanical engineering, Rohan founded Anuveshana to bring industrial-grade prototyping to everyone.' },
@@ -16,6 +17,9 @@ const technologies = [
 ];
 
 function AboutPage() {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to top on page load
+  }, []);
   return (
     <main>
       {/* Hero Section */}
@@ -60,19 +64,26 @@ function AboutPage() {
             </p>
           </motion.div>
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center justify-center bg-gray-100 rounded-lg shadow-xl text-gray-500 min-h-[300px] p-4"
-          >
-            <p className="italic text-center">Engineers collaborating over a 3D model</p>
-          </motion.div>
+  initial={{ opacity: 0, scale: 0.8 }}
+  whileInView={{ opacity: 1, scale: 1 }}
+  viewport={{ once: true, amount: 0.4 }}
+  transition={{ duration: 0.6, ease: "easeOut" }}
+  className="flex items-center justify-center "
+>
+  <motion.img
+    src={aboutus}
+    alt="About Us"
+    className="rounded-2xl shadow-lg max-w-full h-auto object-cover"
+    whileHover={{ scale: 1.05 }}
+    transition={{ duration: 0.3 }}
+  />
+</motion.div>
+
         </div>
       </section>
 
       {/* Meet the Team Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-100">
         <div className="container mx-auto px-4 text-center">
           <div className="flex items-center justify-center text-[#ff6200] mb-4">
             <Users size={24} className="mr-3" />

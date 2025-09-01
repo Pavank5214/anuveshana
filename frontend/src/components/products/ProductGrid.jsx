@@ -47,9 +47,9 @@ const ProductGrid = ({ products, loading, error }) => {
                     {product.name}
                   </h3>
                   <div className="flex items-baseline gap-2">
-                    <p className="text-2xl font-extrabold text-gray-900">${product.price}</p>
+                    <p className="text-2xl font-extrabold text-gray-900">₹{product.price}</p>
                     {product.discountPrice && (
-                      <p className="text-sm line-through text-gray-400">${product.discountPrice}</p>
+                      <p className="text-sm line-through text-gray-400">₹{product.discountPrice}</p>
                     )}
                   </div>
                   {/* Color Squares */}

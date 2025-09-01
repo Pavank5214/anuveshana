@@ -11,7 +11,7 @@ const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About Us' },
   { href: '/portfolio', label: 'Portfolio' },
-  { href: '/blog', label: 'Blog' },
+  // { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Contact' },
 ];
 
@@ -53,7 +53,9 @@ const Header = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-40 bg-[#0a1a2f] text-white shadow-lg">
+     <header className="fixed top-9 left-0 w-full z-40 bg-[#0a1a2f] text-white shadow-lg">
+
+
         <div className="container mx-auto flex items-center justify-between py-3 px-4">
           {/* Left: Logo and Site Name */}
           <Link to="/" className="flex items-center gap-3">

@@ -11,7 +11,7 @@ const FeaturedCollection = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="container mx-auto flex flex-col-reverse lg:flex-row items-center bg-gray-50 rounded-3xl shadow-xl overflow-hidden"
+        className="container mx-auto flex flex-col-reverse lg:flex-row items-center bg-gray-200 rounded-3xl shadow-xl overflow-hidden"
       >
         {/* Left Content */}
         <div className="lg:w-1/2 p-8 md:p-12 text-center lg:text-left">

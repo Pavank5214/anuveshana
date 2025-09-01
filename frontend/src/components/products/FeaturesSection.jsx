@@ -27,7 +27,7 @@ const features = [
 
 const FeaturesSection = () => {
   return (
-    <section className="py-20 px-4 bg-white">
+    <section className="py-20 px-4 bg-gray-100">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         {features.map((feature, index) => (
           <motion.div

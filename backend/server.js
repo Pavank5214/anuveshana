@@ -12,7 +12,8 @@ const subscribeRoute = require('./routes/subscribeRoute');
 const adminRoutes = require('./routes/adminRoutes');
 const productAdminRoutes = require('./routes/productAdminRoutes');
 const adminOrderRoutes = require('./routes/adminOrderRoutes');
-
+const portfolioRoutes = require("./routes/portfolioRoutes");
+const contactRoutes = require("./routes/contactRoutes")
 
 const app = express();
 app.use(express.json());
@@ -57,11 +58,14 @@ app.use("/api/checkout", checkoutRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api", subscribeRoute);
+app.use("/api/portfolio", portfolioRoutes);
+app.use("/api/contact", contactRoutes);
 
 // Admin Routes
 app.use("/api/admin/users", adminRoutes);
 app.use("/api/admin/products", productAdminRoutes);
 app.use("/api/admin/orders", adminOrderRoutes);
+app.use("/api/admin/portfolio", portfolioRoutes);
 
 
 app.listen(PORT ,()=>{

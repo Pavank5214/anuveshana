@@ -4,7 +4,8 @@ import { RiTwitterXLine } from "react-icons/ri";
 
 const Topbar = () => {
   return (
-    <div className="bg-gradient-to-r from-[#ff4d4d] via-[#ff1e56] to-[#ea2e0e] text-white shadow-md">
+    <div className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-[#ff4d4d] via-[#ff1e56] to-[#ea2e0e] text-white shadow-md">
+
       <div className="container mx-auto flex justify-between items-center py-2 px-4">
         {/* Left Social Links */}
         <div className="hidden md:flex items-center space-x-4">

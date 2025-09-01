@@ -42,7 +42,7 @@ const OrderDetailsPage = () => {
   const { shippingAddress } = orderDetails;
 
   return (
-    <div className="max-w-7xl mx-auto p-4 sm:p-6">
+    <div className="max-w-7xl mx-auto p-4 sm:p-6 mt-30">
       {/* Page Title */}
       <h2 className="text-2xl md:text-3xl font-bold mb-6 text-emerald-700">
         Order Details
@@ -209,7 +209,7 @@ const OrderDetailsPage = () => {
         {/* Back to Orders Link */}
         <div className="flex justify-start">
           <Link
-            to="/my-orders"
+            to="/profile"
             className="inline-block px-5 py-2 rounded-lg bg-emerald-600 text-white font-medium hover:bg-emerald-700 transition"
           >
             ← Back to My Orders

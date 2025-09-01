@@ -5,7 +5,10 @@ import {
   FaClipboardList,
   FaStore,
   FaSignOutAlt,
-  FaHome
+  FaHome,
+  FaBlog,
+  FaUsers,
+  FaBriefcase
 } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { Link, NavLink, useNavigate } from "react-router-dom";
@@ -67,6 +70,21 @@ const AdminSidebar = () => {
             <FaClipboardList />
             <span>Orders</span>
           </NavLink>
+
+          <NavLink to="/admin/portfolio" className={linkClasses}>
+        <FaBriefcase />
+        <span>Portfolio</span>
+      </NavLink>
+
+      <NavLink to="/blog" className={linkClasses}>
+        <FaBlog />
+        <span >Blog</span>
+      </NavLink>
+
+      <NavLink to="/admin/contacts" className={linkClasses}>
+        <FaUsers />
+        <span >Reach Outs</span>
+      </NavLink>
 
           <NavLink to="/" className={linkClasses}>
             <FaStore />

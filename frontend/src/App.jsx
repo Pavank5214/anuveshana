@@ -26,6 +26,11 @@ import ContactUs from "./components/common/ContactUs"
 import {Provider} from "react-redux"
 import store from "./redux/store"
 import ProtectedRoute from "./components/common/ProtectedRoute"
+import EditPortfolioPage from "./components/admin/EditPortfolioPage"
+import PortfolioManagement from "./components/admin/PortfolioManagement"
+import CreatePortfolioPage from "./components/admin/CreatePortfolioPage"
+import ContactManagement from "./components/admin/ContactManagement"
+
 
 const App = () => {
   return (
@@ -40,6 +45,7 @@ const App = () => {
           <Route path ="/upload" element={<FileUpload/>} />
           <Route path="/blog" element={<Blog/>} />
           <Route path="/about" element={<AboutUs/>} />
+        
           <Route path="/contact" element={<ContactUs/>} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
@@ -59,7 +65,12 @@ const App = () => {
         <Route path="products" element={<ProductManagement />}/>
         <Route path="products/:id/edit" element={<EditProductPage />}/>
         <Route path="orders" element={<OrderManagement />}/>
-        <Route path="/admin/products/create" element={<CreateProductPage />} />
+        <Route path="products/create" element={<CreateProductPage />} />
+        <Route path="portfolio" element={<PortfolioManagement />}/>
+        <Route path="portfolio/:id/edit" element={<EditPortfolioPage />}/>
+        <Route path="portfolio/create" element={<CreatePortfolioPage />}/>
+        <Route path="contacts" element={<ContactManagement />}/>
+
 
          
         </Route>
