@@ -125,8 +125,13 @@ const ProductDetails = ({ productId }) => {
               <p className="text-2xl font-semibold text-gray-800 mb-3">
                 ₹{selectedProduct.price}
               </p>
-              <p className="text-gray-700 mb-5">{selectedProduct.description}</p>
-              <p className="text-gray-800 font-medium mb-3">Enter Your Custom Name:</p>
+              <p
+  className="text-gray-700 leading-relaxed"
+  dangerouslySetInnerHTML={{ __html: selectedProduct.description }}
+></p>
+
+
+              <p className="text-gray-800 font-medium mt-5 mb-3">Enter Your Custom Name:</p>
               <input
                 type="text"
                 value={customerName}
