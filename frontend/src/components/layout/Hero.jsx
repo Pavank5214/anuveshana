@@ -1,9 +1,12 @@
-import React from "react";
+import {useEffect} from "react";
 import videoBg from "../../assets/video2.mp4";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const Hero = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to top on page load
+  }, []);
   return (
     <section className="relative w-full h-200">
     {/* Background Video */}
