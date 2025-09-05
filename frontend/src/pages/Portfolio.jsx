@@ -50,7 +50,7 @@ const Portfolio = () => {
     
 
   return (
-    <main className="py-30 bg-gray-200 mt-5 min-h-screen">
+    <main className="py-30 bg-gray-200 mt-10 min-h-screen">
       <div className="container mx-auto px-4 text-center">
         <h1 className="text-4xl font-bold mb-4">Our Portfolio</h1>
         <p className="text-gray-600 mb-8">

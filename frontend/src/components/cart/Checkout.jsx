@@ -245,13 +245,13 @@ const Checkout = () => {
                   <p className="text-gray-500">BaseColor: {product.baseColor}</p>
                 </div>
               </div>
-              <p className="text-xl font-semibold">${product.price?.toLocaleString()}</p>
+              <p className="text-xl font-semibold">₹ {product.price?.toLocaleString()}</p>
             </div>
           ))}
         </div>
         <div className="flex justify-between items-center text-lg mb-4">
           <p className="font-medium">Subtotal</p>
-          <p className="font-semibold">${cart.totalPrice?.toLocaleString()}</p>
+          <p className="font-semibold">₹ {cart.totalPrice?.toLocaleString()}</p>
         </div>
         <div className="flex justify-between items-center text-lg">
           <p className="font-medium">Shipping</p>
@@ -259,7 +259,7 @@ const Checkout = () => {
         </div>
         <div className="flex justify-between items-center text-xl mt-6 border-t pt-4">
           <p className="font-semibold">Total</p>
-          <p className="font-bold text-gray-900">${cart.totalPrice?.toLocaleString()}</p>
+          <p className="font-bold text-gray-900">₹ {cart.totalPrice?.toLocaleString()}</p>
         </div>
       </div>
     </div>

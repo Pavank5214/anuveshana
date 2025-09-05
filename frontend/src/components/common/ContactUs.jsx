@@ -37,7 +37,7 @@ function ContactPage() {
   }, [success, dispatch]);
 
   const contactInfo = [
-    { icon: <MapPin size={20} />, text: "APMC Yard, Vijayapura, Karnataka, 586101" },
+    { icon: <MapPin size={20} />, text: "No 11 Hasmitha Residency SF-3, 11th main  end, Padmanabhanagar, Banglore, Karnataka-560070" },
     { icon: <Phone size={20} />, text: "+91 89518 52210", href: "tel:+918951852210" },
     { icon: <Mail size={20} />, text: "contact@anuveshana.tech", href: "mailto:contact@anuveshana.tech" },
     { icon: <Clock size={20} />, text: "Mon - Sat, 9:00 AM - 6:00 PM" },
@@ -147,7 +147,7 @@ function ContactPage() {
       {/* Map Section */}
       <section className="w-full h-[50vh]">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3822.464197364132!2d75.7481139152885!3d16.82773418852366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc6555555555555%3A0x2614b8c9a6a89c9a!2sAPMC%20Yard%2C%20Vijayapura%2C%20Karnataka%20586101!5e0!3m2!1sen!2sin!4v1661421890123!5m2!1sen!2sin"
+          src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3888.9013766706607!2d77.5537611750755!3d12.914059887396077!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTLCsDU0JzUwLjYiTiA3N8KwMzMnMjIuOCJF!5e0!3m2!1sen!2sin!4v1757040991663!5m2!1sen!2sin" 
           width="100%"
           height="100%"
           style={{ border: 0 }}

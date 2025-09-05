@@ -1,4 +1,5 @@
 import React from "react";
+import logo from "../../assets/logo.png";
 
 const RazorpayButton = ({ amount, onSuccess, onError, name, email, phone }) => {
   const handlePayment = async () => {
@@ -6,9 +7,9 @@ const RazorpayButton = ({ amount, onSuccess, onError, name, email, phone }) => {
       key: import.meta.env.VITE_RAZORPAY_KEY,
       amount: amount * 100, // in paise
       currency: "INR",
-      name: "Your Shop Name",
+      name: "Anuveshana Technologies",
       description: "Order Payment",
-      image: "/logo.png",
+      image: logo,
       handler: function (response) {
         onSuccess(response);
       },

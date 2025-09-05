@@ -18,7 +18,7 @@ const Footer = () => {
         >
           <Link to="/" className="flex items-center gap-3 mb-4">
             <img src={logo} alt="Anuveshana Logo" className="h-12 w-auto" />
-            <span className="text-xl font-bold text-white">Anuveshana</span>
+            <span className="text-xl font-bold text-white">Anuveshana Technologies</span>
           </Link>
           <p className="text-sm leading-relaxed">
             Your partner in precision 3D printing and advanced manufacturing, turning digital designs into physical reality.
@@ -68,7 +68,7 @@ const Footer = () => {
           <ul className="space-y-4">
             <li className="flex items-start gap-3">
               <MapPin size={18} className="mt-1 flex-shrink-0" />
-              <span>APMC Yard, Vijayapura, Karnataka, 586101, India</span>
+              <span>No 11 Hasmitha Residency SF-3, 11th main  end, Padmanabhanagar, Banglore, Karnataka-560070</span>
             </li>
             <li className="flex items-start gap-3">
               <Phone size={18} className="mt-1 flex-shrink-0" />

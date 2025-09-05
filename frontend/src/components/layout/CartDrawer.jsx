@@ -84,7 +84,7 @@ const CartDrawer = ({ drawerOpen, toggleCartDrawer }) => {
             <div className="flex justify-between items-center mb-4">
               <span className="text-gray-600 text-sm">Subtotal</span>
               <span className="text-lg font-semibold text-gray-900">
-                ${cart.totalPrice.toFixed(2)}
+              ₹ {cart.totalPrice.toFixed(2)}
               </span>
             </div>
 

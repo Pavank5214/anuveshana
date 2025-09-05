@@ -12,7 +12,7 @@ const Topbar = () => {
           <a href="#" className="hover:scale-125 transition-transform duration-300">
             <TbBrandMeta className="h-5 w-5" />
           </a>
-          <a href="#" className="hover:scale-125 transition-transform duration-300">
+          <a href="https://www.instagram.com/anubis__3d/" className="hover:scale-125 transition-transform duration-300">
             <IoLogoInstagram className="h-5 w-5" />
           </a>
           <a href="#" className="hover:scale-125 transition-transform duration-300">
