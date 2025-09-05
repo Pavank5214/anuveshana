@@ -2,7 +2,79 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Users, Target, Cuboid, Bot, BrainCircuit } from "lucide-react";
 import aboutus from "../../assets/aboutus.jpg";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
+const AboutPage = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to top on page load
+
+    // Simulate fetch delay (remove in real app)
+    const timer = setTimeout(() => setLoading(false), 1200);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-gray-100 py-16 md:py-24 animate-pulse">
+        {/* Hero Skeleton */}
+        <div className="max-w-3xl mx-auto px-4 mt-20 mb-16 space-y-6">
+          <div className="h-12 w-3/4 bg-gray-300 rounded" />
+          <div className="h-6 w-full bg-gray-300 rounded" />
+        </div>
+
+        {/* Mission Skeleton */}
+        <div className="container mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center bg-white rounded-lg shadow-md mb-16">
+          <div className="space-y-4">
+            <div className="h-6 w-1/4 bg-gray-300 rounded" />
+            <div className="h-10 w-3/4 bg-gray-300 rounded" />
+            <div className="h-40 w-full bg-gray-300 rounded" />
+          </div>
+          <div className="h-72 w-full bg-gray-300 rounded-2xl" />
+        </div>
+
+        {/* Team Skeleton */}
+        <div className="container mx-auto px-4 py-16 md:py-24 text-center mb-16 space-y-8">
+          <div className="h-6 w-1/4 bg-gray-300 rounded mx-auto" />
+          <div className="h-10 w-1/2 bg-gray-300 rounded mx-auto" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+            {Array(3).fill(0).map((_, idx) => (
+              <div key={idx} className="bg-white p-6 rounded-lg shadow-md space-y-4">
+                <div className="w-32 h-32 bg-gray-300 rounded-full mx-auto" />
+                <div className="h-5 w-3/4 bg-gray-300 rounded mx-auto" />
+                <div className="h-4 w-1/2 bg-gray-300 rounded mx-auto" />
+                <div className="h-10 w-full bg-gray-300 rounded mx-auto" />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Technology Skeleton */}
+        <div className="container mx-auto px-4 py-16 md:py-24 text-center mb-16 bg-white rounded-lg shadow-md space-y-8">
+          <div className="h-10 w-1/3 bg-gray-300 rounded mx-auto" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+            {Array(3).fill(0).map((_, idx) => (
+              <div key={idx} className="border border-gray-200 p-8 rounded-lg space-y-4">
+                <div className="h-8 w-8 bg-gray-300 rounded-full mx-auto" />
+                <div className="h-5 w-3/4 bg-gray-300 rounded mx-auto" />
+                <div className="h-10 w-full bg-gray-300 rounded mx-auto" />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* CTA Skeleton */}
+        <div className="container mx-auto px-4 py-16 md:py-24 text-center bg-gray-800 rounded-lg shadow-md space-y-4">
+          <div className="h-10 w-1/2 bg-gray-300 rounded mx-auto" />
+          <div className="h-6 w-3/4 bg-gray-300 rounded mx-auto" />
+          <div className="h-12 w-40 bg-gray-300 rounded mx-auto mt-4" />
+        </div>
+      </main>
+    );
+  }
+
+  
 
 const teamMembers = [
   { name: "Rohan K.", role: "Founder & Lead Engineer", bio: "With a decade of experience in mechanical engineering, Rohan founded Anuveshana to bring industrial-grade prototyping to everyone." },
@@ -16,10 +88,7 @@ const technologies = [
   { icon: <BrainCircuit size={32} />, name: "SLS (Selective Laser Sintering)", description: "Creates strong, functional parts from nylon powder, suitable for complex geometries and end-use components." },
 ];
 
-function AboutPage() {
-  useEffect(() => {
-    window.scrollTo(0, 0); // Scroll to top on page load
-  }, []);
+
 
   return (
     <main className="min-h-screen bg-gray-100 py-16 md:py-24">

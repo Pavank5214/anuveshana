@@ -7,7 +7,33 @@ const ProductGrid = ({ products, loading, error }) => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to top on page load
   }, []);
-  if (loading) return <p className="text-center py-10 text-gray-500">Loading products...</p>;
+  if (loading) {
+    return (
+      <div className="p-4 sm:p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-20 animate-pulse">
+        {Array(8).fill(0).map((_, index) => (
+          <div key={index} className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full">
+            {/* Image Skeleton */}
+            <div className="w-full h-72 sm:h-80 bg-gray-300 rounded-t-xl" />
+            
+            {/* Product Info Skeleton */}
+            <div className="p-5 flex flex-col flex-grow gap-2">
+              <div className="h-5 w-3/4 bg-gray-300 rounded" /> {/* Title */}
+              <div className="h-6 w-1/2 bg-gray-300 rounded" /> {/* Price */}
+              <div className="flex items-center gap-2 mt-2">
+                {Array(4).fill(0).map((_, idx) => (
+                  <div key={idx} className="w-5 h-5 bg-gray-300 rounded-full" />
+                ))}
+              </div>
+              <div className="flex gap-2 mt-3">
+                <div className="h-5 w-12 bg-gray-300 rounded-full" />
+                <div className="h-5 w-12 bg-gray-300 rounded-full" />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
   if (error) return <p className="text-center py-10 text-red-500">Error: {error}</p>;
 
   return (

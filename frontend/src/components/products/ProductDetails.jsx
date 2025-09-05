@@ -81,8 +81,70 @@ const ProductDetails = ({ productId }) => {
       .finally(() => setIsButtonDisabled(false));
   };
 
-  if (loading) return <p className="text-center py-20">Loading...</p>;
-  if (error) return <p className="text-center text-red-500">Error: {error}</p>;
+  if (loading) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-20 grid md:grid-cols-2 gap-10 animate-pulse mt-20">
+        {/* Left: Image skeleton */}
+        <div className="flex flex-col gap-4">
+          <div className="w-full h-[500px] bg-gray-300 rounded-xl" />
+          <div className="flex gap-3 overflow-x-auto">
+            {Array(4).fill(0).map((_, idx) => (
+              <div key={idx} className="w-20 h-20 bg-gray-300 rounded-lg" />
+            ))}
+          </div>
+        </div>
+  
+        {/* Right: Info skeleton */}
+        <div className="flex flex-col gap-4">
+          <div className="h-8 w-3/4 bg-gray-300 rounded" /> {/* Product title */}
+          <div className="h-6 w-1/2 bg-gray-300 rounded" /> {/* Price */}
+          <div className="h-6 w-1/3 bg-gray-300 rounded" /> {/* Original price */}
+          
+          {/* Custom name input */}
+          <div className="h-12 w-full bg-gray-300 rounded" />
+          
+          {/* Color selectors */}
+          <div className="flex gap-3 mt-2">
+            {Array(3).fill(0).map((_, idx) => (
+              <div key={idx} className="w-9 h-9 bg-gray-300 rounded-full" />
+            ))}
+          </div>
+          <div className="flex gap-3 mt-2">
+            {Array(3).fill(0).map((_, idx) => (
+              <div key={idx} className="w-9 h-9 bg-gray-300 rounded-full" />
+            ))}
+          </div>
+  
+          {/* Size selector */}
+          <div className="flex gap-3 mt-2">
+            {Array(3).fill(0).map((_, idx) => (
+              <div key={idx} className="px-5 py-2 bg-gray-300 rounded-lg" />
+            ))}
+          </div>
+  
+          {/* Quantity selector */}
+          <div className="flex gap-3 mt-2 items-center">
+            <div className="w-10 h-10 bg-gray-300 rounded-lg" />
+            <div className="w-6 h-6 bg-gray-300 rounded" />
+            <div className="w-10 h-10 bg-gray-300 rounded-lg" />
+          </div>
+  
+          {/* Add to cart button */}
+          <div className="w-full h-12 bg-gray-300 rounded-lg mt-4" />
+  
+          {/* Description */}
+          <div className="h-4 w-full bg-gray-300 rounded mt-4" />
+          <div className="h-4 w-5/6 bg-gray-300 rounded mt-2" />
+          <div className="h-4 w-2/3 bg-gray-300 rounded mt-2" />
+        </div>
+      </div>
+    );
+  }
+  
+  
+  if (error) {
+    return <p className="text-center text-red-500">Error: {error}</p>;
+  }
 
   return (
     <div className="bg-gray-50 min-h-screen mt-30">

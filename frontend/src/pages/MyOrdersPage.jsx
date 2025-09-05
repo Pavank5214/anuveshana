@@ -21,7 +21,57 @@ const MyOrdersPage = () => {
     const handleRowClick = (orderId) =>{
     navigate(`/order/${orderId}`)
     }
-    if(loading) return <p>Loading ...</p>;
+    if (loading) {
+        return (
+          <div className="max-w-7xl mx-auto p-4 sm:p-6 space-y-4 animate-pulse">
+            {/* Page Title Skeleton */}
+            <div className="h-8 w-1/3 bg-gray-300 rounded mb-6"></div>
+      
+            {/* Table Skeleton */}
+            <div className="relative shadow sm:rounded-lg overflow-x-auto">
+              <table className="min-w-full text-left text-gray-500">
+                <thead className="bg-gray-100 text-xs uppercase text-gray-700">
+                  <tr>
+                    {["Image", "Order Id", "Created", "Shipping address", "Items", "Price", "Status"].map((heading, idx) => (
+                      <th key={idx} className="py-2 px-4 sm:py-3">
+                        <div className="h-3 w-16 bg-gray-300 rounded"></div>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {Array(4).fill(0).map((_, rowIdx) => (
+                    <tr key={rowIdx} className="border-b">
+                      <td className="py-2 px-2 sm:py-4 sm:px-4">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-300 rounded-lg"></div>
+                      </td>
+                      <td className="py-2 px-2 sm:py-4 sm:px-4">
+                        <div className="h-3 w-24 bg-gray-300 rounded"></div>
+                      </td>
+                      <td className="py-2 px-2 sm:py-4 sm:px-4">
+                        <div className="h-3 w-32 bg-gray-300 rounded"></div>
+                      </td>
+                      <td className="py-2 px-2 sm:py-4 sm:px-4">
+                        <div className="h-3 w-28 bg-gray-300 rounded"></div>
+                      </td>
+                      <td className="py-2 px-2 sm:py-4 sm:px-4">
+                        <div className="h-3 w-6 bg-gray-300 rounded"></div>
+                      </td>
+                      <td className="py-2 px-2 sm:py-4 sm:px-4">
+                        <div className="h-3 w-16 bg-gray-300 rounded"></div>
+                      </td>
+                      <td className="py-2 px-2 sm:py-4 sm:px-4">
+                        <div className="h-3 w-12 bg-gray-300 rounded-full"></div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        );
+      }
+      
     if(error) return <p>Error  : {error}</p>
   return (
     <div className="max-w-7xl mx-auto p-4 sm:p-6  ">

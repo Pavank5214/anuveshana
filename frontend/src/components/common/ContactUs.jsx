@@ -43,6 +43,47 @@ function ContactPage() {
     { icon: <Clock size={20} />, text: "Mon - Sat, 9:00 AM - 6:00 PM" },
   ];
 
+  if (loading) {
+    return (
+      <main className="bg-gray-200 mt-20 min-h-screen animate-pulse">
+        {/* Header Skeleton */}
+        <section className="py-16 text-center px-4">
+          <div className="h-12 w-3/4 bg-gray-300 rounded mx-auto mb-4" />
+          <div className="h-6 w-1/2 bg-gray-300 rounded mx-auto mt-4" />
+        </section>
+  
+        {/* Form & Contact Info Skeleton */}
+        <section className="container mx-auto px-4 pb-16">
+          <div className="grid gap-10 lg:grid-cols-2 items-start max-w-6xl mx-auto">
+            {/* Form Skeleton */}
+            <div className="bg-gray-50 p-10 rounded-2xl shadow-xl space-y-5">
+              <div className="h-8 w-full bg-gray-300 rounded" />
+              <div className="h-8 w-full bg-gray-300 rounded" />
+              <div className="h-8 w-full bg-gray-300 rounded" />
+              <div className="h-24 w-full bg-gray-300 rounded" />
+              <div className="h-10 w-1/2 bg-gray-300 rounded mx-auto mt-4" />
+            </div>
+  
+            {/* Contact Info Skeleton */}
+            <div className="bg-white p-10 rounded-2xl shadow-xl space-y-6">
+              {Array(4)
+                .fill(0)
+                .map((_, idx) => (
+                  <div key={idx} className="flex items-start gap-4">
+                    <div className="h-5 w-5 bg-gray-300 rounded-full mt-1" />
+                    <div className="h-6 w-3/4 bg-gray-300 rounded" />
+                  </div>
+                ))}
+            </div>
+          </div>
+        </section>
+  
+        {/* Map Skeleton */}
+        <section className="w-full h-[50vh] bg-gray-300 rounded-lg mx-auto" />
+      </main>
+    );
+  }
+  
   return (
     <main className="bg-gray-200 mt-20 min-h-screen">
       {/* Header */}
