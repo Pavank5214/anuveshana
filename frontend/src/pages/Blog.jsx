@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Calendar, User } from 'lucide-react';
+import DualNamePlank from './DualNamePlank';
 
 // --- Mock Blog Data (images removed) ---
 const blogPosts = [
@@ -32,7 +33,7 @@ const blogPosts = [
 function BlogPage() {
   return (
     <main>
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 mt-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold">From the Blog</h1>
