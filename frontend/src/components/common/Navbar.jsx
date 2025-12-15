@@ -150,9 +150,9 @@ const Header = () => {
           <button onClick={toggleNavDrawer}><IoMdClose className="h-6 w-6 text-gray-700" /></button>
         </div>
         
-        <div className="p-4 border-b border-gray-200">
+        {/* <div className="p-4 border-b border-gray-200">
             <SearchBar />
-        </div>
+        </div> */}
         
         <nav className="p-4 flex flex-col gap-4">
           {navLinks.map((link) => (
