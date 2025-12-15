@@ -6,6 +6,7 @@ import { STLLoader } from 'three/examples/jsm/loaders/STLLoader';
 import { motion } from 'framer-motion';
 import { UploadCloud, Box, X, Info } from 'lucide-react';
 import { Tooltip } from 'react-tooltip';
+import {  Bounds } from '@react-three/drei'
 
 // --- CONFIGURATION ---
 
@@ -289,10 +290,12 @@ function FileUpload() {
         <div className="absolute top-4 right-4 z-10 bg-white/80 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-gray-600 shadow-sm pointer-events-none">
           Interactive 3D View
         </div>
-        <Canvas camera={{ position: [200, 200, 200], fov: 5 }}>
+        <Canvas camera={{ position: [200, 200, 200], fov: 40 }}>
           <ambientLight intensity={0.6} />
           <directionalLight position={[200, 200, 200]} intensity={1} castShadow />
-          <STLModel geometry={geometry} color={color} />
+          <Bounds fit clip observe margin={1.2}>
+    <STLModel geometry={geometry} color={color} />
+  </Bounds>
           <OrbitControls enableDamping dampingFactor={0.25} />
           
         </Canvas>
