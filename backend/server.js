@@ -18,7 +18,7 @@ const app = express();
 app.use(express.json());
 
 const allowedOrigins = [
-  "http://localhost:5173", // Local frontend
+  "http://localhost:5173", "https://www.pavankumar.site" , // Local frontend
   /\.vercel\.app$/          // Any Vercel frontend URL
 ];
 
