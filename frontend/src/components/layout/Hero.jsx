@@ -32,7 +32,7 @@ const Hero = () => {
         transition={{ duration: 0.8 }}
         className="text-white max-w-4xl"
       >
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight mb-4 drop-shadow-md">
+        <h1 className="text-4xl text-[#ff6200] sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight mb-4 drop-shadow-md">
           Precision 3D Printing Solutions
         </h1>
 
@@ -53,14 +53,14 @@ const Hero = () => {
           </motion.div>
 
           {/* Secondary "Shop Now" Button */}
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+          {/* <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Link
               to="/collections/all"
               className="inline-block bg-transparent border-2 border-white text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:bg-white hover:text-black transition-all duration-300"
             >
               Shop Now
             </Link>
-          </motion.div>
+          </motion.div> */}
         </div>
       </motion.div>
     </div>

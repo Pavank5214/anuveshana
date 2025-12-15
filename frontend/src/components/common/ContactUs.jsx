@@ -37,9 +37,9 @@ function ContactPage() {
   }, [success, dispatch]);
 
   const contactInfo = [
-    { icon: <MapPin size={20} />, text: "No 11 Hasmitha Residency SF-3, 11th main  end, Padmanabhanagar, Banglore, Karnataka-560070" },
+    { icon: <MapPin size={20} />, text: " Banglore, Karnataka-560070" },
     { icon: <Phone size={20} />, text: "+91 89518 52210", href: "tel:+918951852210" },
-    { icon: <Mail size={20} />, text: "contact@anuveshana.tech", href: "mailto:contact@anuveshana.tech" },
+    { icon: <Mail size={20} />, text: "anuveshanatechnologies@gmail.com", href: "https://mail.google.com/mail/?view=cm&fs=1&to=anuveshanatechnologies@gmail.com&su=Business%20Inquiry&body=Hello%20Anuveshana%20Team,"},
     { icon: <Clock size={20} />, text: "Mon - Sat, 9:00 AM - 6:00 PM" },
   ];
 

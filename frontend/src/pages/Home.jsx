@@ -40,7 +40,7 @@ const Home = () => {
     <div className='pt-26'>
       <Hero/>
     {/* <GenderCollectionSection/> */}
-    <NewArrivals/>
+    {/* <NewArrivals/> */}
     <Features />
     {/* Best Sellers */}
     {/* <h2 className="text-3xl text-center font-bold mb-4">Best Seller </h2>

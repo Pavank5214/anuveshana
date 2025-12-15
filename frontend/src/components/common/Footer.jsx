@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { FaWhatsapp } from "react-icons/fa";
 import { Instagram, MessageSquare, Phone, Mail, MapPin } from "lucide-react";
 import logo from '../../assets/logo.png'; // Make sure the path to your logo is correct
 
@@ -68,7 +69,7 @@ const Footer = () => {
           <ul className="space-y-4">
             <li className="flex items-start gap-3">
               <MapPin size={18} className="mt-1 flex-shrink-0" />
-              <span>No 11 Hasmitha Residency SF-3, 11th main  end, Padmanabhanagar, Banglore, Karnataka-560070</span>
+              <span> Banglore, Karnataka-560070</span>
             </li>
             <li className="flex items-start gap-3">
               <Phone size={18} className="mt-1 flex-shrink-0" />
@@ -76,13 +77,31 @@ const Footer = () => {
             </li>
             <li className="flex items-start gap-3">
               <Mail size={18} className="mt-1 flex-shrink-0" />
-              <a href="mailto:contact@anuveshana.tech" className="hover:text-white transition-colors">contact@anuveshana.tech</a>
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=anuveshanatechnologies@gmail.com&su=Business%20Inquiry&body=Hello%20Anuveshana%20Team," className="hover:text-white transition-colors">anuveshanatechnologies@gmail.com</a>
             </li>
           </ul>
           <div className="flex items-center space-x-4 mt-6">
-            <a href="https://www.instagram.com/anubis__3d/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-white hover:scale-110 transition-transform"><Instagram /></a>
-            <a href="https://wa.me/918951852210" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="hover:text-white hover:scale-110 transition-transform"><MessageSquare /></a>
-          </div>
+  <a
+    href="https://www.instagram.com/anubis__3d/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Instagram"
+    className="hover:text-white hover:scale-110 transition-transform"
+  >
+    <Instagram className="w-6 h-6" />
+  </a>
+
+  <a
+    href="https://wa.me/918951852210"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="WhatsApp"
+    className="hover:text-white hover:scale-110 transition-transform"
+  >
+    <FaWhatsapp className="w-6 h-6" />
+  </a>
+</div>
+
         </motion.div>
 
       </div>

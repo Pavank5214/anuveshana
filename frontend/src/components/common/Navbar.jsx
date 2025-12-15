@@ -18,6 +18,8 @@ const navLinks = [
 const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [navDrawerOpen, setNavDrawerOpen] = useState(false);
+  const [showTopbar, setShowTopbar] = useState(true);
+  const [atTop, setAtTop] = useState(true);
 
   const { cart } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.auth);
@@ -26,6 +28,7 @@ const Header = () => {
 
   const navDrawerRef = useRef(null);
   const cartDrawerRef = useRef(null);
+  const lastScrollY = useRef(0);
 
   const toggleNavDrawer = () => {
     setNavDrawerOpen(!navDrawerOpen);
@@ -45,29 +48,53 @@ const Header = () => {
   };
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+    const handleScroll = () => {
+      setAtTop(window.scrollY === 0);
     };
+  
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScroll = window.scrollY;
+  
+      if (currentScroll > lastScrollY.current && currentScroll > 50) {
+        setShowTopbar(false); // scrolling down
+      } else {
+        setShowTopbar(true); // scrolling up
+      }
+  
+      lastScrollY.current = currentScroll;
+    };
+  
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <>
-     <header className="fixed top-9 left-0 w-full z-40 bg-[#0a1a2f] text-white shadow-lg">
+   <header
+  className={`fixed left-0 w-full z-40 bg-[#0a1a2f] text-white shadow-lg
+  transition-all duration-300 ease-in-out
+  ${atTop ? "top-9" : "top-0"}`}
+>
 
 
-        <div className="container mx-auto flex items-center justify-between py-3 px-4">
+
+        <div className="container mx-auto flex items-center justify-between py-3 px-4 mr-60">
           {/* Left: Logo and Site Name */}
           <Link to="/" className="flex items-center gap-3">
             <img src={logo} alt="Anuveshana Logo" className="h-12 w-auto" />
             {/* --- CORRECTED THIS LINE --- */}
-            <span className="text-lg sm:text-xl font-bold tracking-tight">
+            <span className="uppercase text-lg sm:text-xl font-bold tracking-tight">
               Anuveshana Technologies
             </span>
           </Link>
 
           {/* Middle: Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-6 mr-30">
             {navLinks.map((link) => (
               <NavLink
                 key={link.href}
@@ -86,7 +113,7 @@ const Header = () => {
           {/* Right: Icons and Actions */}
           <div className="flex items-center space-x-2 sm:space-x-4">
             {user && user.role === "admin" && (<Link to="/admin" className='block bg-white px-2 rounded text-sm text-black font-semibold'>Admin</Link>)}
-            
+{/*             
             <Link to="/profile" className="hover:text-[#ff6200] transition-colors">
               <HiOutlineUser className="h-6 w-6" />
             </Link>
@@ -98,7 +125,7 @@ const Header = () => {
             </button>
             <div className="hidden lg:block">
               <SearchBar />
-            </div>
+            </div> */}
             <button onClick={toggleNavDrawer} className="md:hidden p-2">
               <HiBars3BottomRight className="h-6 w-6" />
             </button>
