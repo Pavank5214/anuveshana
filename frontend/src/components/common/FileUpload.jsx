@@ -291,24 +291,32 @@ function FileUpload() {
                   <Canvas
   camera={{ position: [0, 0, 150], fov: 60 }}
   dpr={[1, 2]}
+  gl={{ toneMappingExposure: 1.2 }}
 >
-  {/* Soft base light */}
-  <ambientLight intensity={0.6} />
+  {/* Base fill */}
+  <ambientLight intensity={0.8} />
 
-  {/* Single key light */}
+  {/* Key light */}
   <directionalLight
     position={[10, 15, 10]}
-    intensity={0.6}
-    castShadow={false}
+    intensity={0.9}
+  />
+
+  {/* Fill light (opposite side) */}
+  <directionalLight
+    position={[-8, 5, 12]}
+    intensity={0.4}
+  />
+
+  {/* Rim light for edge separation */}
+  <directionalLight
+    position={[0, -10, -15]}
+    intensity={0.3}
   />
 
   <STLModel geometry={geometry} color={color} />
 
-  <OrbitControls
-    autoRotate
-    autoRotateSpeed={0.3}
-    enablePan={false}
-  />
+  <OrbitControls autoRotate autoRotateSpeed={0.25} enablePan={false} />
 </Canvas>
 
 

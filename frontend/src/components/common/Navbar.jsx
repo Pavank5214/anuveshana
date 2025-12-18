@@ -70,7 +70,7 @@ const Header = () => {
         className={`fixed left-0 w-full z-40 transition-all duration-300 ease-in-out border-b border-white/5
         ${atTop ? "top-9 bg-transparent py-4" : "top-0 bg-[#0B0F19]/90 backdrop-blur-md shadow-lg py-3"}`}
       >
-        <div className="container mx-auto flex items-center justify-between px-4 md:px-8">
+        <div className="container mx-auto flex items-center justify-between px-4 md:px-1">
           
           {/* Left: Logo and Site Name */}
           <Link to="/" className="flex items-center gap-3 group">
@@ -86,7 +86,7 @@ const Header = () => {
           </Link>
 
           {/* Middle: Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-8 ">
             {navLinks.map((link) => (
               <NavLink
                 key={link.href}
@@ -133,7 +133,7 @@ const Header = () => {
       {/* Mobile Navigation Drawer (Updated UI) */}
       <div
         ref={navDrawerRef}
-        className={`fixed top-0 right-0 w-3/4 sm:w-1/2 md:w-1/3 h-full bg-[#0B0F19] border-l border-white/10 shadow-2xl transform transition-transform duration-300 z-50 ${
+        className={`fixed top-5 right-0 w-3/4 sm:w-1/2 md:w-1/3 h-full bg-[#0B0F19] border-l border-white/10 shadow-2xl transform transition-transform duration-300 z-50 ${
           navDrawerOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
