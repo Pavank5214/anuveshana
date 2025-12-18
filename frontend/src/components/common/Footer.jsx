@@ -19,7 +19,7 @@ const Footer = () => {
         >
           <Link to="/" className="flex items-center gap-3 mb-4">
             <img src={logo} alt="Anuveshana Logo" className="h-12 w-auto" />
-            <span className="text-xl font-bold text-white">Anuveshana Technologies</span>
+            <span className="text-xl font-bold text-white uppercase">Anuveshana Technologies</span>
           </Link>
           <p className="text-sm leading-relaxed">
             Your partner in precision 3D printing and advanced manufacturing, turning digital designs into physical reality.
