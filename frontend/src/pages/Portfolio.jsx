@@ -25,10 +25,14 @@ const Portfolio = () => {
     { name: "Industrial", filter: "industrial", icon: <Factory size={16} /> },
   ];
 
-  const filteredItems =
-    activeFilter === "all"
-      ? portfolios
-      : portfolios.filter((item) => item.category === activeFilter);
+  const normalize = (v) => v?.toLowerCase().trim();
+
+const filteredItems =
+  activeFilter === "all"
+    ? portfolios
+    : portfolios.filter(
+        (item) => normalize(item.category) === activeFilter
+      );
 
   // --- Dark Mode Skeleton Loader ---
   if (loading) {

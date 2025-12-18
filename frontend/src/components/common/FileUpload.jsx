@@ -52,14 +52,12 @@ function STLModel({ geometry, color }) {
 
   return (
     <mesh ref={meshRef} geometry={geometry} castShadow receiveShadow>
-      <meshPhysicalMaterial
-        color={color}
-        metalness={0.2}
-        roughness={0.5}
-        clearcoat={0.5}
-        clearcoatRoughness={0.3}
-        side={THREE.DoubleSide}
-      />
+      <meshStandardMaterial
+  color={color}
+  metalness={0}
+  roughness={0.85}
+/>
+
     </mesh>
   );
 }
@@ -290,12 +288,29 @@ function FileUpload() {
                     </span>
                   </div>
                   
-                  <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 150], fov: 50 }}>
-                    <Stage environment="city" intensity={0.5} contactShadow={false} shadowBias={-0.0015}>
-                      <STLModel geometry={geometry} color={color} />
-                    </Stage>
-                    <OrbitControls autoRotate autoRotateSpeed={0.5} makeDefault />
-                  </Canvas>
+                  <Canvas
+  camera={{ position: [0, 0, 150], fov: 60 }}
+  dpr={[1, 2]}
+>
+  {/* Soft base light */}
+  <ambientLight intensity={0.6} />
+
+  {/* Single key light */}
+  <directionalLight
+    position={[10, 15, 10]}
+    intensity={0.6}
+    castShadow={false}
+  />
+
+  <STLModel geometry={geometry} color={color} />
+
+  <OrbitControls
+    autoRotate
+    autoRotateSpeed={0.3}
+    enablePan={false}
+  />
+</Canvas>
+
 
                   <button
                     onClick={handleRemoveFile}
