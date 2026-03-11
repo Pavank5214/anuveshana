@@ -1,6 +1,6 @@
 const express = require('express');
 const Order = require('../models/Order');
-const {protect, admin} = require('../middleware/authMiddleware');
+const { protect, admin } = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
@@ -23,16 +23,19 @@ router.get('/', protect, admin, async (req, res) => {
 router.put('/:id', protect, admin, async (req, res) => {
     try {
         const order = await Order.findById(req.params.id).populate('user', 'name');
-        if(order){
-            order.status = req.body.status || order.status ;
-            order.isDelivered = req.body.status === 'Delivered' ? true : order.isDelivered ;
-            order.deliveredAt = req.body.status === 'Delivered' ? Date.now() : order.deliveredAt ;
+        if (order) {
+            order.status = req.body.status || order.status;
+            order.isDelivered = req.body.status === 'Delivered' ? true : order.isDelivered;
+            order.deliveredAt = req.body.status === 'Delivered' ? Date.now() : order.deliveredAt;
+            order.trackingId = req.body.trackingId !== undefined ? req.body.trackingId : order.trackingId;
+            order.trackingUrl = req.body.trackingUrl !== undefined ? req.body.trackingUrl : order.trackingUrl;
+            order.courier = req.body.courier !== undefined ? req.body.courier : order.courier;
             const updatedOrder = await order.save();
             res.json(updatedOrder);
-        } else{
+        } else {
             res.status(404).json({ msg: 'Order not found' });
         }
-        
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ msg: 'Server error' });
@@ -44,10 +47,10 @@ router.put('/:id', protect, admin, async (req, res) => {
 // @access Private/Admin
 router.delete('/:id', protect, admin, async (req, res) => {
     try {
-        const order =  await Order.findById(req.params.id);
-        if(order) {
-             await order.deleteOne();
-             res.json({ message: "Order deleted successfully"});
+        const order = await Order.findById(req.params.id);
+        if (order) {
+            await order.deleteOne();
+            res.json({ message: "Order deleted successfully" });
         } else {
             res.status(404).json({ msg: "Order not found" });
         }

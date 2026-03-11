@@ -3,9 +3,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../redux/slices/authSlice";
 import { mergeCart } from "../redux/slices/cartSlice";
-import { Loader2 } from "lucide-react";
+import { Loader2, User, Mail, Lock, Zap, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 import logo from "../assets/logo.png";
-import registerIllustration from "../assets/Register.png";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -15,18 +15,18 @@ const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { user, guestId, loading } = useSelector((state) => state.auth);
-  const { cart } = useSelector((state) => state.cart);
+  const { user, guestId, loading, error } = useSelector((s) => s.auth);
+  const { cart } = useSelector((s) => s.cart);
 
   const redirect = new URLSearchParams(location.search).get("redirect") || "/";
   const isCheckoutRedirect = redirect.includes("checkout");
 
+  useEffect(() => { window.scrollTo(0, 0); }, []);
+
   useEffect(() => {
     if (user) {
       if (cart?.products.length > 0 && guestId) {
-        dispatch(mergeCart({ guestId, user })).then(() => {
-          navigate(isCheckoutRedirect ? "/checkout" : "/");
-        });
+        dispatch(mergeCart({ guestId, user })).then(() => navigate(isCheckoutRedirect ? "/checkout" : "/"));
       } else {
         navigate(isCheckoutRedirect ? "/checkout" : "/");
       }
@@ -39,100 +39,128 @@ const Register = () => {
   };
 
   return (
-    <div className="mt-20 flex items-center justify-center bg-gradient-to-br from-pink-100 via-purple-100 to-blue-100 py-16 md:py-24 px-4">
-      <div className="w-full max-w-5xl bg-white rounded-2xl shadow-2xl overflow-hidden grid md:grid-cols-2">
-        {/* Left Illustration */}
-        <div className="hidden md:flex bg-gradient-to-br from-purple-500 to-pink-600 items-center justify-center p-8">
-          <img
-            src={registerIllustration}
-            alt="Register Illustration"
-            className="w-4/5 max-w-md animate-fadeIn"
-          />
-        </div>
-
-       {/* Right Register Form */}
-<div className="flex flex-col justify-center p-6 sm:p-8">
-  {/* Logo */}
-  <div className="flex justify-center items-center mb-4">
-  <img src={logo} alt="Logo" className="w-16 h-16 ml-10 object-contain " />
-            <h2 className="text-2xl md:text-3xl  font-bold text-gray-800">
-              Anuveshana Technologies
-            </h2>
-  </div>
-
-  {/* Welcome Text */}
-  <h2 className="text-2xl sm:text-3xl font-semibold text-center mb-2 text-gray-900">
-    Create Your Account
-  </h2>
-  <p className="text-gray-500 text-center mb-4 text-sm sm:text-base">
-    Fill in your details to get started
-  </p>
-
-  {/* Form */}
-  <form onSubmit={handleSubmit} className="space-y-4">
-    {/* Name */}
-    <div>
-      <label className="block text-sm font-medium mb-1 text-gray-700">Full Name</label>
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        className="w-full p-2.5 rounded-lg border border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:bg-white transition-all"
-        placeholder="Enter your name"
-        required
-      />
-    </div>
-
-    {/* Email */}
-    <div>
-      <label className="block text-sm font-medium mb-1 text-gray-700">Email Address</label>
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className="w-full p-2.5 rounded-lg border border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:bg-white transition-all"
-        placeholder="Enter your email"
-        required
-      />
-    </div>
-
-    {/* Password */}
-    <div>
-      <label className="block text-sm font-medium mb-1 text-gray-700">Password</label>
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className="w-full p-2.5 rounded-lg border border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:bg-white transition-all"
-        placeholder="Enter your password"
-        required
-      />
-    </div>
-
-    {/* Submit Button */}
-    <button
-      type="submit"
-      disabled={loading}
-      className="w-full flex items-center justify-center bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white p-2.5 rounded-lg font-semibold transition-all duration-300 shadow-lg"
-    >
-      {loading ? <Loader2 className="animate-spin mr-2" size={18} /> : ""}
-      {loading ? "Signing Up..." : "Sign Up"}
-    </button>
-  </form>
-
-  {/* Login Link */}
-  <p className="mt-4 text-center text-gray-600 text-sm sm:text-base">
-    Already have an account?{" "}
-    <Link
-      to={`/login?redirect=${encodeURIComponent(redirect)}`}
-      className="text-purple-600 hover:underline font-semibold"
-    >
-      Login here
-    </Link>
-  </p>
-</div>
-
+    <div className="min-h-screen bg-[#0B0F19] flex items-center justify-center px-4 py-16">
+      {/* Background glow */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#ff6200]/10 rounded-full blur-[120px]" />
       </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 32 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="relative w-full max-w-md"
+      >
+        {/* Card */}
+        <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 sm:p-10 shadow-2xl">
+
+          {/* Logo + Brand */}
+          <div className="flex flex-col items-center mb-8">
+            <div className="w-16 h-16 rounded-2xl overflow-hidden bg-white/10 border border-white/10 flex items-center justify-center mb-4">
+              <img src={logo} alt="Logo" className="w-12 h-12 object-contain" />
+            </div>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-orange-400 text-xs font-bold tracking-widest uppercase mb-4">
+              <Zap size={11} className="fill-orange-400" />
+              Anuveshana Technologies
+            </div>
+            <h1 className="text-3xl font-black tracking-tighter text-white text-center">
+              Create{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff6200] to-orange-400">
+                Account
+              </span>
+            </h1>
+            <p className="text-slate-500 text-sm mt-2 text-center">Fill in your details to get started</p>
+          </div>
+
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Name */}
+            <div>
+              <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Full Name</label>
+              <div className="relative">
+                <User size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" />
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Your name"
+                  required
+                  className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-3.5 text-white text-sm outline-none placeholder:text-slate-600 focus:border-orange-500/60 focus:ring-1 focus:ring-orange-500/30 transition-all"
+                />
+              </div>
+            </div>
+
+            {/* Email */}
+            <div>
+              <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Email</label>
+              <div className="relative">
+                <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@example.com"
+                  required
+                  className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-3.5 text-white text-sm outline-none placeholder:text-slate-600 focus:border-orange-500/60 focus:ring-1 focus:ring-orange-500/30 transition-all"
+                />
+              </div>
+            </div>
+
+            {/* Password */}
+            <div>
+              <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Password</label>
+              <div className="relative">
+                <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" />
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  required
+                  className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-3.5 text-white text-sm outline-none placeholder:text-slate-600 focus:border-orange-500/60 focus:ring-1 focus:ring-orange-500/30 transition-all"
+                />
+              </div>
+            </div>
+
+            {/* Error */}
+            {error && (
+              <motion.div
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-red-500/10 border border-red-500/30 text-red-400 rounded-xl px-4 py-2.5 text-sm text-center"
+              >
+                {error}
+              </motion.div>
+            )}
+
+            {/* Submit */}
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.97 }}
+              type="submit"
+              disabled={loading}
+              className="w-full bg-[#ff6200] hover:bg-[#e55a00] text-white py-3.5 rounded-xl font-bold uppercase tracking-wider text-sm transition-all shadow-lg shadow-orange-500/25 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-2"
+            >
+              {loading ? (
+                <><Loader2 size={18} className="animate-spin" /> Creating Account...</>
+              ) : (
+                <><span>Create Account</span><ArrowRight size={16} /></>
+              )}
+            </motion.button>
+          </form>
+
+          {/* Login link */}
+          <p className="mt-6 text-center text-slate-500 text-sm">
+            Already have an account?{" "}
+            <Link
+              to={`/login?redirect=${encodeURIComponent(redirect)}`}
+              className="text-orange-400 hover:text-orange-300 font-semibold transition-colors"
+            >
+              Login here
+            </Link>
+          </p>
+        </div>
+      </motion.div>
     </div>
   );
 };

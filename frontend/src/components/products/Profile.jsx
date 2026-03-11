@@ -1,36 +1,27 @@
 import React, { useEffect } from "react";
-import MyOrdersPage from "../../pages/MyOrdersPage";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../redux/slices/authSlice";
 import { clearCart } from "../../redux/slices/cartSlice";
-import { LogOut, Mail, User as UserIcon, Calendar, ShoppingCart, ShieldCheck } from "lucide-react";
+import { motion } from "framer-motion";
+import {
+  LogOut,
+  Mail,
+  ShoppingBag,
+  ShieldCheck,
+  ArrowUpRight,
+  User
+} from "lucide-react";
 
-// Reusable Card component for consistent styling in the light theme
-const Card = ({ children, className = "" }) => (
-  <div
-    className={`bg-white/70 backdrop-blur-xl border border-gray-200/80 rounded-2xl shadow-lg shadow-gray-300/20 transition-all duration-300 hover:shadow-xl hover:shadow-gray-300/30 ${className}`}
-  >
-    {children}
-  </div>
-);
-
-
-// Reusable Detail Row for the Account Info card
-const DetailRow = ({ icon: Icon, label, value }) => (
-    <div className="flex items-center justify-between py-3">
-        <p className="flex items-center text-sm text-gray-500">
-            <Icon size={16} className="mr-3" />
-            {label}
-        </p>
-        <p className="font-medium text-gray-700 text-right">{value}</p>
-    </div>
-);
-
+/**
+ * Profile Component - High-Spec Workspace
+ * A high-precision, functional layout for professional account management.
+ */
 const Profile = () => {
   useEffect(() => {
-    window.scrollTo(0, 0); // Scroll to top on page load
+    window.scrollTo(0, 0);
   }, []);
+
   const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -47,70 +38,118 @@ const Profile = () => {
     navigate("/login");
   };
 
+  if (!user) return null;
+
   return (
-    <div className="relative min-h-screen bg-gray-50 text-gray-800 font-sans p-4 sm:p-6 lg:p-8 mt-30">
-      {/* Subtle Watercolor Background Effect */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-0 -left-1/4 h-96 w-96 bg-[radial-gradient(circle_at_center,_#67e8f920_0,_#f9fafb_60%)] opacity-70 blur-3xl"></div>
-        <div className="absolute bottom-0 -right-1/4 h-80 w-80 bg-[radial-gradient(circle_at_center,_#6ee7b720_0,_#f9fafb_60%)] opacity-70 blur-3xl"></div>
-      </div>
-      
-      <div className="container mx-auto">
-        <main className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          
-          {/* Left Column: Profile & Account Details */}
-          <div className="lg:col-span-1 flex flex-col gap-8">
-            
-            {/* Main Profile Card */}
-            <Card className="p-6 text-center flex flex-col items-center">
-              <div className="h-24 w-24 rounded-full bg-emerald-500/10 flex items-center justify-center ring-4 ring-emerald-500/20 mb-4">
-                <span className="text-4xl font-bold text-emerald-600">
-                  {user?.name?.charAt(0)?.toUpperCase() || "U"}
-                </span>
+    <div className="min-h-screen bg-[#050608] pt-32 pb-24 text-slate-400 font-sans selection:bg-orange-500/30">
+      <div className="max-w-6xl mx-auto px-6">
+
+        {/* Profile Identity Stripe */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-[#0A0B0E] border border-white/5 rounded-[2.5rem] overflow-hidden shadow-2xl"
+        >
+
+          {/* Header Action Bar */}
+          <div className="p-8 md:p-12 border-b border-white/5 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="flex items-center gap-8">
+              <div className="w-24 h-24 rounded-3xl bg-[#ff6200] flex items-center justify-center text-4xl font-black text-white shadow-2xl shadow-orange-500/10">
+                {user.name.charAt(0).toUpperCase()}
               </div>
-              <h1 className="text-2xl font-bold text-gray-800">{user?.name}</h1>
-              <p className="text-sm text-gray-500 flex items-center justify-center mt-1">
-                <Mail size={14} className="mr-2" />
-                {user?.email}
-              </p>
-              <button
-                onClick={handleLogout}
-                className="mt-6 flex w-full items-center justify-center bg-red-500/5 hover:bg-red-500/10 border border-red-200 text-red-600 px-4 py-2 rounded-lg font-medium transition-colors duration-200"
+              <div className="text-center md:text-left">
+                <h1 className="text-3xl font-black text-white tracking-tighter mb-1">{user.name}</h1>
+                <p className="text-sm font-medium text-slate-500">{user.email}</p>
+                <div className="flex items-center justify-center md:justify-start gap-2 mt-4">
+                  <span className="px-4 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-[10px] font-black text-emerald-400 uppercase tracking-widest flex items-center gap-2">
+                    <ShieldCheck size={12} />
+                    Verified {user.role || 'Member'}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <button
+              onClick={handleLogout}
+              className="px-10 py-4 rounded-2xl bg-white/5 border border-white/10 text-[11px] font-black text-white hover:bg-white hover:text-black transition-all uppercase tracking-[0.2em] flex items-center gap-3 active:scale-95"
+            >
+              Log Out
+              <LogOut size={16} />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+
+            {/* Account Specifications */}
+            <div className="p-8 md:p-12 border-b lg:border-b-0 lg:border-r border-white/5 bg-white/[0.01]">
+              <h3 className="text-[10px] font-black text-slate-600 uppercase tracking-[0.3em] mb-12 flex items-center gap-3">
+                <User size={14} className="text-orange-500" />
+                Account Details
+              </h3>
+
+              <div className="grid grid-cols-1 gap-10">
+                <div className="group">
+                  <label className="text-[10px] font-black text-slate-700 uppercase tracking-widest block mb-1.5 transition-colors group-hover:text-orange-500">Legal Name</label>
+                  <p className="text-xl font-bold text-white tracking-tight">{user.name}</p>
+                </div>
+                <div className="group">
+                  <label className="text-[10px] font-black text-slate-700 uppercase tracking-widest block mb-1.5 transition-colors group-hover:text-orange-500">Primary Email</label>
+                  <p className="text-xl font-bold text-white tracking-tight">{user.email}</p>
+                </div>
+                <div className="group">
+                  <label className="text-[10px] font-black text-slate-700 uppercase tracking-widest block mb-1.5 transition-colors group-hover:text-orange-500">User Role</label>
+                  <p className="text-xl font-bold text-white tracking-tight uppercase">{user.role || 'Customer'}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Workflow & Actions */}
+            <div className="p-8 md:p-12 space-y-12">
+              <h3 className="text-[10px] font-black text-slate-600 uppercase tracking-[0.3em] mb-4 flex items-center gap-3">
+                <ShoppingBag size={14} className="text-orange-500" />
+                Workflow
+              </h3>
+
+              <div
+                onClick={() => navigate('/my-orders')}
+                className="group relative bg-white/[0.03] border border-white/5 rounded-[2rem] p-8 cursor-pointer hover:border-orange-500/40 hover:bg-orange-500/5 transition-all duration-500 shadow-xl overflow-hidden"
               >
-                <LogOut size={16} className="mr-2" />
-                Sign Out
-              </button>
-            </Card>
-
-            {/* Account Details Card */}
-            <Card className="p-6">
-              <h2 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
-                <ShieldCheck size={20} className="mr-3 text-emerald-500" />
-                Account Info
-              </h2>
-              <div className="divide-y divide-gray-200/70">
-                <DetailRow icon={UserIcon} label="Full Name" value={user?.name} />
-                <DetailRow icon={Mail} label="Email" value={user?.email} />
-           
-
+                <div className="relative z-10 flex items-center justify-between">
+                  <div className="flex items-center gap-6">
+                    <div className="w-14 h-14 rounded-2xl bg-[#ff6200] flex items-center justify-center text-white shadow-2xl shadow-orange-500/20 group-hover:scale-105 transition-transform">
+                      <ShoppingBag size={28} />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-black text-white uppercase tracking-tighter">Order History</h4>
+                      <p className="text-xs text-slate-500 mt-1 font-medium group-hover:text-slate-400">View status and invoices</p>
+                    </div>
+                  </div>
+                  <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-600 group-hover:text-white group-hover:bg-orange-500 transition-all duration-300">
+                    <ArrowUpRight size={20} />
+                  </div>
+                </div>
+                <div className="absolute top-0 right-0 h-full w-32 bg-gradient-to-l from-[#ff6200]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
-            </Card>
-          </div>
 
-          {/* Right Column: Order History */}
-          <div className="lg:col-span-3">
-            <Card className="p-6">
-              <h2 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
-                <ShoppingCart size={20} className="mr-3 text-emerald-500" />
-                Order History
-              </h2>
-              <div className="overflow-hidden rounded-lg border border-gray-200/80">
-                 <MyOrdersPage />
+              <div className="pt-8 border-t border-white/5">
+                <p className="text-[11px] text-slate-600 leading-relaxed font-medium uppercase tracking-wider">
+                  For information updates or security requests, please reach out to our team.
+                  All account data is secured with industry-standard protocols.
+                </p>
               </div>
-            </Card>
-          </div>
+            </div>
 
-        </main>
+          </div>
+        </motion.div>
+
+        {/* Global Footer */}
+        <div className="mt-12 flex items-center justify-between px-6 text-[10px] font-black text-slate-800 uppercase tracking-[0.4em]">
+          <span>© Anoveshana Technologies</span>
+          <div className="flex items-center gap-6 text-slate-800/60">
+            <span className="flex items-center gap-2">System Active</span>
+          </div>
+        </div>
+
       </div>
     </div>
   );

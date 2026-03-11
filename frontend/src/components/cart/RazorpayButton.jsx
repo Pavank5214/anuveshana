@@ -9,7 +9,7 @@ const RazorpayButton = ({ amount, onSuccess, onError, name, email, phone }) => {
       currency: "INR",
       name: "Anuveshana Technologies",
       description: "Order Payment",
-      image: logo,
+      // image: logo, // Removed to prevent CORS issues with localhost in dev
       handler: function (response) {
         onSuccess(response);
       },
@@ -22,7 +22,7 @@ const RazorpayButton = ({ amount, onSuccess, onError, name, email, phone }) => {
         address: "Shipping Address",
       },
       theme: {
-        color: "#000000",
+        color: "#ff6200",
       },
       modal: {
         ondismiss: function () {
@@ -43,7 +43,7 @@ const RazorpayButton = ({ amount, onSuccess, onError, name, email, phone }) => {
   return (
     <button
       onClick={handlePayment}
-      className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-xl shadow-lg"
+      className="w-full bg-[#ff6200] hover:bg-[#e55a00] text-white font-black py-4 rounded-3xl shadow-xl shadow-orange-500/20 transition-all uppercase tracking-widest text-sm"
     >
       Pay Now ₹{amount?.toLocaleString()}
     </button>

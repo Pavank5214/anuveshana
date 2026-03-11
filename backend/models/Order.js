@@ -14,59 +14,71 @@ const orderItemSchema = new mongoose.Schema({
 
 
 const orderSchema = new mongoose.Schema({
-    user : {
-        type : mongoose.Schema.Types.ObjectId ,
-        ref : "User",
-        required : true
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
     },
-    orderItems : [orderItemSchema],
-    shippingAddress : {
-        address : {type : String , required : true},
-        city: {type : String , required : true},
-        postalCode : {type : String , required : true},
-        country : {type : String , required : true},
-        phone :{
-            type : Number
+    orderItems: [orderItemSchema],
+    shippingAddress: {
+        address: { type: String, required: true },
+        city: { type: String, required: true },
+        postalCode: { type: String, required: true },
+        country: { type: String, required: true },
+        phone: {
+            type: Number
         }
     },
-    paymentMethod : {
-        type : String , 
-        required : true
+    paymentMethod: {
+        type: String,
+        required: true
     },
-    totalPrice : {
-        type : Number ,
-        required : true
+    totalPrice: {
+        type: Number,
+        required: true
     },
-    isPaid : {
-        type : Boolean ,
-        default : false
+    isPaid: {
+        type: Boolean,
+        default: false
     },
     email: { type: String, required: true },
-    paidAt : {
-        type : Date ,
+    paidAt: {
+        type: Date,
     },
-    isDelivered : {
-        type : Boolean ,
-        default : false
+    isDelivered: {
+        type: Boolean,
+        default: false
     },
-    deliveredAt : {
-        type : Date ,
+    deliveredAt: {
+        type: Date,
     },
-    paymentStatus : {
-        type : String,
-        default : "Pending"
+    paymentStatus: {
+        type: String,
+        default: "Pending"
     },
-    status : {
-        type : String ,
-        enum : ["Processing", "Shipped", "Delivered", "Cancelled"],
-        default : "Processing"
+    status: {
+        type: String,
+        enum: ["Placed", "Processing", "Printing", "Shipped", "Delivered", "Cancelled"],
+        default: "Placed"
     },
     paymentDetails: {
         type: mongoose.Schema.Types.Mixed
     },
-    
+    trackingId: {
+        type: String,
+        default: ""
+    },
+    trackingUrl: {
+        type: String,
+        default: ""
+    },
+    courier: {
+        type: String,
+        default: ""
+    },
+
 },
-{timestamps: true}
+    { timestamps: true }
 );
 
 module.exports = mongoose.model("order", orderSchema);

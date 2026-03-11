@@ -1,130 +1,106 @@
 import React from "react";
-import { RiDeleteBin3Line } from "react-icons/ri";
+import { Minus, Plus, Trash2 } from "lucide-react";
 import { useDispatch } from "react-redux";
-import {
-  updateCartItemQuantity,
-  removeFromCart,
-} from "../../redux/slices/cartSlice";
+import { updateCartItemQuantity, removeFromCart } from "../../redux/slices/cartSlice";
+import { motion } from "framer-motion";
 
 const CartContent = ({ cart, userId, guestId }) => {
   const dispatch = useDispatch();
 
-  // Handle quantity updates
-  const handleAddToCart = (
-    productId,
-    delta,
-    quantity,
-    size,
-    color
-  ) => {
-    const newQuantity = quantity + delta;
-    if (newQuantity >= 1) {
-      dispatch(
-        updateCartItemQuantity({
-          productId,
-          quantity: newQuantity,
-          guestId,
-          userId,
-          size,
-          color,
-        })
-      );
+  const handleQtyChange = (productId, delta, quantity, size, color) => {
+    const newQty = quantity + delta;
+    if (newQty >= 1) {
+      dispatch(updateCartItemQuantity({ productId, quantity: newQty, guestId, userId, size, color }));
     }
   };
 
-  const handleRemoveFromCart = (productId, size, color) => {
+  const handleRemove = (productId, size, color) => {
     dispatch(removeFromCart({ productId, guestId, userId, size, color }));
   };
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-3">
       {cart.products.map((product, index) => (
-        <div
+        <motion.div
           key={index}
-          className="flex items-start justify-between gap-4 p-4 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, x: 40 }}
+          transition={{ duration: 0.25, delay: index * 0.04 }}
+          className="flex gap-3 p-3 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all"
         >
-          {/* Product Image */}
-          <div className="flex-shrink-0">
-            <img
-              src={product.image}
-              alt={product.name}
-              className="w-24 h-28 object-cover rounded-lg border border-gray-100"
-            />
+          {/* Image */}
+          <div className="shrink-0 w-20 h-24 rounded-xl overflow-hidden border border-white/10">
+            <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
           </div>
 
-          {/* Product Details */}
-          <div className="flex flex-col justify-between flex-grow">
+          {/* Details */}
+          <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5">
             <div>
-              <h3 className="font-medium text-gray-800 text-sm sm:text-base line-clamp-2">
-                {product.name}
-              </h3>
-              <p className="text-xs sm:text-sm text-gray-500 mt-1">
-              Name:{" "}
-              <span className="font-medium">{product.custName}</span> <br/>
-                Size: 
-                <span className="font-medium">{product.size}</span> <br/>
-                TextColor:{" "}
-                <span className="font-medium mr-2">{product.textColor}</span> <br/>
-                 BaseColor:{" "}
-                <span className="font-medium">{product.baseColor}</span>
+              <h3 className="text-white text-sm font-bold leading-snug truncate">{product.name}</h3>
+
+              {/* Specs */}
+              <div className="flex flex-wrap gap-1.5 mt-1.5">
+                {product.custName && (
+                  <span className="text-[10px] bg-white/5 border border-white/10 text-slate-400 px-2 py-0.5 rounded-full">
+                    ✏ {product.custName}
+                  </span>
+                )}
+                {product.size && (
+                  <span className="text-[10px] bg-white/5 border border-white/10 text-slate-400 px-2 py-0.5 rounded-full">
+                    {product.size}
+                  </span>
+                )}
+                {product.textColor && (
+                  <span className="flex items-center gap-1 text-[10px] bg-white/5 border border-white/10 text-slate-400 px-2 py-0.5 rounded-full">
+                    <span className="w-2.5 h-2.5 rounded-full border border-white/20 inline-block" style={{ backgroundColor: product.textColor.toLowerCase() }} />
+                    Text
+                  </span>
+                )}
+                {product.baseColor && (
+                  <span className="flex items-center gap-1 text-[10px] bg-white/5 border border-white/10 text-slate-400 px-2 py-0.5 rounded-full">
+                    <span className="w-2.5 h-2.5 rounded-full border border-white/20 inline-block" style={{ backgroundColor: product.baseColor.toLowerCase() }} />
+                    Base
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Price + Qty + Delete */}
+            <div className="flex items-center justify-between mt-2">
+              <p className="text-white font-black text-base">
+                ₹{(product.price * product.quantity).toLocaleString("en-IN")}
               </p>
-            </div>
 
-            {/* Quantity Controls */}
-            <div className="flex items-center mt-3">
-              <button
-                onClick={() =>
-                  handleAddToCart(
-                    product.productId,
-                    -1,
-                    product.quantity,
-                    product.size,
-                    product.color
-                  )
-                }
-                className="border rounded-full w-7 h-7 flex items-center justify-center text-lg font-semibold text-gray-600 hover:bg-gray-100 transition-colors"
-              >
-                −
-              </button>
-              <span className="mx-3 font-medium text-gray-700">
-                {product.quantity}
-              </span>
-              <button
-                onClick={() =>
-                  handleAddToCart(
-                    product.productId,
-                    1,
-                    product.quantity,
-                    product.size,
-                    product.color
-                  )
-                }
-                className="border rounded-full w-7 h-7 flex items-center justify-center text-lg font-semibold text-gray-600 hover:bg-gray-100 transition-colors"
-              >
-                +
-              </button>
+              <div className="flex items-center gap-2">
+                {/* Qty controls */}
+                <div className="flex items-center border border-white/15 rounded-lg overflow-hidden bg-white/5 h-7">
+                  <button
+                    onClick={() => handleQtyChange(product.productId, -1, product.quantity, product.size, product.color)}
+                    className="w-7 h-full flex items-center justify-center text-slate-400 hover:text-orange-400 active:text-orange-400 transition-colors"
+                  >
+                    <Minus size={12} />
+                  </button>
+                  <span className="w-6 text-center text-white text-xs font-bold select-none">{product.quantity}</span>
+                  <button
+                    onClick={() => handleQtyChange(product.productId, 1, product.quantity, product.size, product.color)}
+                    className="w-7 h-full flex items-center justify-center text-slate-400 hover:text-orange-400 active:text-orange-400 transition-colors"
+                  >
+                    <Plus size={12} />
+                  </button>
+                </div>
+
+                {/* Delete */}
+                <button
+                  onClick={() => handleRemove(product.productId, product.size, product.color)}
+                  className="w-7 h-7 flex items-center justify-center rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400 transition-colors"
+                >
+                  <Trash2 size={13} />
+                </button>
+              </div>
             </div>
           </div>
-
-          {/* Price & Delete */}
-          <div className="flex flex-col items-end justify-between">
-            <p className="text-base sm:text-lg font-semibold text-gray-800">
-            ₹ {product.price.toLocaleString()}
-            </p>
-            <button
-              onClick={() =>
-                handleRemoveFromCart(
-                  product.productId,
-                  product.size,
-                  product.color
-                )
-              }
-              className="mt-3 p-2 rounded-full hover:bg-red-50 transition-colors"
-            >
-              <RiDeleteBin3Line className="h-5 w-5 text-red-500 hover:text-red-600" />
-            </button>
-          </div>
-        </div>
+        </motion.div>
       ))}
     </div>
   );
